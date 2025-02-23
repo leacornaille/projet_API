@@ -1,3 +1,6 @@
+# !/usr/bin/ python3
+#-*- coding : utf-8 -*- 
+
 from Bio import Entrez 
 import json 
 
@@ -98,7 +101,7 @@ def extract_info (gene_symbol, organism) :
               }
 
 
-def main (dico_sp) :
+def main_NCBI (dico_sp) :
     dico_NCBI={}
     # faire un dico avec tout les infos pour tout les gene/espèce
     for species, gene in dico_sp.items() : 
@@ -108,6 +111,25 @@ def main (dico_sp) :
 
 
 
-fichier = input("Entrez une fichier avec pour chaque ligne gene,espece : ")
+def lien_NCBI(dico_NCBI):
+    dico_lien = {}
+
+    # Pour chaque espèce et informations dans le dico, créer les liens NCBI correspondant  
+    for species, info in dico_NCBI.items():
+        dico_lien[species] = {
+            "lien_RNA": [f"https://www.ncbi.nlm.nih.gov/nuccore/{rna}" 
+                         for rna in info["Transcript"] ],
+
+            "lien_prot": [f"https://www.ncbi.nlm.nih.gov/protein/{prot}" 
+                          for prot in info["Protein"] ],
+
+            "lien_gene": [f"https://www.ncbi.nlm.nih.gov/gene/{info['Gene ID'][0]}"] 
+        }
+
+    return dico_lien
+
+
+fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
 dico = GeneSymbol(fichier)
-print(main(dico_sp= dico))
+dico_NCBI = main(dico_sp= dico)
+dico_lien_NCBI = lien_NCBI(dico_NCBI=dico_NCBI)
