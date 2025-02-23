@@ -49,8 +49,9 @@ def QuickGO (uniprot_id) :
 
     dico_aspect={}
     # requete pour avoir le goID
-    url = f"https://www.ebi.ac.uk/QuickGO/services/annotation/search?geneProductId={uniprot_id}&limit=200&page=1"
-    response = requests.get(url, headers={"Accept": "application/json"})
+    serveur = "https://www.ebi.ac.uk/QuickGO/services"
+    ext1 = f"/annotation/search?geneProductId={uniprot_id}&limit=200&page=1"
+    response = requests.get(serveur+ext1, headers={"Accept": "application/json"})
     if response.ok:
         data = response.json()
         results = data.get("results", [])
@@ -58,17 +59,15 @@ def QuickGO (uniprot_id) :
             aspect = res.get("goAspect")                
             goID = res.get("goId")
 
-            # lien go term 
-            
-
-            #requete API pour avoir Go term 
-            url = f"https://www.ebi.ac.uk/QuickGO/services/ontology/go/terms/{goID}"
-            response = requests.get(url, headers={"Accept": "application/json"})
+            #requete API pour avoir les GO term 
+            ext2 = f"/ontology/go/terms/{goID}"
+            response = requests.get(serveur+ext2, headers={"Accept": "application/json"})
             if response.ok:
                 data = response.json()
                 results = data.get("results", [])
                 if results : 
                     go_name=results[0].get("name")
+                    #lien GO_term
                     go_link = f"https://amigo.geneontology.org/amigo/term/{goID}"
                     go= f"name: {go_name}, link: {go_link}"
                 if aspect not in dico_aspect:
