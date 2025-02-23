@@ -1,7 +1,7 @@
 import requests, json
 
 # creation dico 
-liste = input("Entrez une fichier avec pour chaque ligne gene,espece : ")
+liste = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
 
 # Création d'un dico avec {"espece" : "gene"}
 def GeneSymbol(filename) : 
