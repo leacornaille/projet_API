@@ -1,45 +1,27 @@
 import requests, json
 
-# Création d'un dico avec {"espece" : "gene"}
-def GeneSymbol(filename) : 
-    dico={}
-    fichier = open(filename,'r')
-    lines = fichier.readlines()
-    for line in lines : 
-        line= line.strip()
-        if line : 
-            li = line.split(',')
-            species = li[1]
-            gene =li[0]
-            dico[species]=gene
-    return dico 
-
-
-
-
 # Extraire les uniprot_ID
-def uniprot_ID (filename) : 
+def uniprot_ID (dico_espece) : 
 
-    dico_uniprot={}
-    dico_espece = GeneSymbol(filename)
+    gene = dico_espece["gene_symbol"]
+    species = dico_espece["species"]
+      
+    url = f"https://rest.uniprot.org/uniprotkb/search?query=gene:{gene}+AND+{species}&format=json&fields=accession"
+    response = requests.get(url)
 
-    for species, gene in dico_espece.items() :  
-        url = f"https://rest.uniprot.org/uniprotkb/search?query=gene:{gene}+AND+{species}&format=json&fields=accession"
-        response = requests.get(url)
-
-        if response.ok : 
-            data= response.json()
-            results =data.get("results", [])
-
-            if results : 
-                dico_uniprot[species] = results[0].get("primaryAccession") 
-            else : 
-                dico_uniprot[species] = None
-            
+    if response.ok : 
+        data= response.json()
+        results = data.get("results", [])
+        
+        if results : 
+            dico_espece["UniprotID"] = results[0].get("primaryAccession") 
         else : 
-            print(f"Aucune information trouver pour {species} : {gene} ")
+            dico_espece["UniprotID"] = None
+        
+    else : 
+        print(f"Aucune information trouver pour {species} : {gene} ")
  
-    return dico_uniprot
+    return dico_espece
 
 
 
@@ -75,10 +57,10 @@ def QuickGO (uniprot_id) :
                                      
     return  dico_aspect
 
-def main_GO (filename = "GeneSymbols_45.txt") : 
+def main_GO (dico_species) : 
 
     dico ={}
-    dico_uniprot_id = uniprot_ID(filename)
+    dico_uniprot_id = uniprot_ID(dico_species)
 
     for species, uniprot in dico_uniprot_id.items() :
         if uniprot : 
@@ -88,5 +70,5 @@ def main_GO (filename = "GeneSymbols_45.txt") :
     return dico
 
 # Pour tester
-fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-print(main_GO(fichier))
+#fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
+#print(main_GO(fichier))
