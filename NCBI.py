@@ -82,7 +82,7 @@ def get_seq_info (seq_ids, db) :
 
 def extract_info (gene_symbol, organism) : 
 
-    gene_id, name = get_gene_id(gene_symbol, organism)
+    gene_id, official_name = get_gene_id(gene_symbol, organism)
 
     if gene_id :
         # extraction des ids pour les db prot et nucléotide
@@ -93,43 +93,38 @@ def extract_info (gene_symbol, organism) :
         protein_info = get_seq_info(protein_ids, "protein")
         nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore')
 
-    return   {"Gene Symbol " : gene_symbol,
-              "Name" : name,
+        #Creaction des lien
+        lien_RNA = [ f'<a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank"{rna}<\a>'
+                         for rna in nucleotide_info ]
+
+        lien_prot = [f'<a href="https://www.ncbi.nlm.nih.gov/protein/{prot}" target="_blank"{prot}<\a>' 
+                          for prot in protein_info ]
+
+        lien_gene =  [f'<a href="https://www.ncbi.nlm.nih.gov/gene/{gene_id[0]}" target="_blank">{gene_id[0]}<\a>']
+
+
+    return   {"Species" : organism,
+              "Gene Symbol " : gene_symbol,
+              "Official name" : official_name,
               "Gene ID" : gene_id, 
               "Protein" : protein_info, 
               "Transcript" : nucleotide_info
+              "Links RNA" : lien_RNA,
+              "Links prot" : lien_prot,
+              "Links gene" : lien_gene,
               }
 
 
 def main_NCBI (dico_sp) :
-    dico_NCBI={}
-    # faire un dico avec tout les infos pour tout les gene/espèce
+    list_NCBI=[]
+    # faire une liste avec tout les infos pour tout les gene/espèce
     for species, gene in dico_sp.items() : 
         res = extract_info(gene_symbol= gene, organism= species)
-        dico_NCBI[species] = res
-    return dico_NCBI
-
-
-
-def lien_NCBI(dico_NCBI):
-    dico_lien = {}
-
-    # Pour chaque espèce et informations dans le dico, créer les liens NCBI correspondant  
-    for species, info in dico_NCBI.items():
-        dico_lien[species] = {
-            "lien_RNA": [f"https://www.ncbi.nlm.nih.gov/nuccore/{rna}" 
-                         for rna in info["Transcript"] ],
-
-            "lien_prot": [f"https://www.ncbi.nlm.nih.gov/protein/{prot}" 
-                          for prot in info["Protein"] ],
-
-            "lien_gene": [f"https://www.ncbi.nlm.nih.gov/gene/{info['Gene ID'][0]}"] 
-        }
-
-    return dico_lien
+        list_NCBI.append(res)
+    return list_NCBI
 
 
 fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
 dico = GeneSymbol(fichier)
-dico_NCBI = main_NCBI(dico_sp= dico)
-dico_lien_NCBI = lien_NCBI(dico_NCBI=dico_NCBI)
+list_NCBI = main_NCBI(dico_sp= dico)
+
