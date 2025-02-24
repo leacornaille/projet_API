@@ -1,5 +1,5 @@
 import requests
-from test_NCBI import GeneSymbol 
+from NCBI import GeneSymbol 
 
 def extraire_info_uniprot(dico_espece_gene):
 
@@ -72,7 +72,7 @@ def extraire_info_uniprot(dico_espece_gene):
     return uniprot
 
 
-dico = GeneSymbol("LC_GeneSymbols_45.txt")
+dico = GeneSymbol()
 uniprot = extraire_info_uniprot(dico)
 
 print(uniprot)
