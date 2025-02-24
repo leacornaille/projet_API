@@ -90,17 +90,17 @@ def extract_info (gene_symbol, organism) :
         nucleotide_ids = get_linked_ids(gene_id, 'nuccore') # db nucleotide
 
         # extraction des numéros d'access prot et transcrit
-        protein_info = get_seq_info(protein_ids, "protein")
-        nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore')
+        protein_info = get_seq_info(protein_ids, "protein") or ["data not found"]
+        nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore') or ["data not found"]
 
         #Creaction des lien
-        lien_RNA = [ f'<a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank"{rna}<\a>'
-                         for rna in nucleotide_info ]
+        lien_RNA = [ f'<a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank">{rna}</a>'
+                         for rna in nucleotide_info ] if nucleotide_info[0]!= "data not found" else ["data not found"]
 
-        lien_prot = [f'<a href="https://www.ncbi.nlm.nih.gov/protein/{prot}" target="_blank"{prot}<\a>' 
-                          for prot in protein_info ]
+        lien_prot = [f'<a href="https://www.ncbi.nlm.nih.gov/protein/{prot}" target="_blank">{prot}</a>' 
+                          for prot in protein_info ] if protein_info[0]!= "data not found" else ["data not found"]
 
-        lien_gene =  [f'<a href="https://www.ncbi.nlm.nih.gov/gene/{gene_id[0]}" target="_blank">{gene_id[0]}<\a>']
+        lien_gene =  [f'<a href="https://www.ncbi.nlm.nih.gov/gene/{gene_id[0]}" target="_blank">{gene_id[0]}</a>']
 
 
     return   {"Species" : organism,
