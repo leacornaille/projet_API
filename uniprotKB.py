@@ -1,8 +1,9 @@
 import requests
 from NCBI import GeneSymbol 
 
-def extraire_info_uniprot(dico_espece_gene):
+def extraire_info_uniprot(filename = "GeneSymbols_45.txt"):
 
+    dico_espece_gene = GeneSymbol(filename)
     uniprot =[]
     pdb_entries = []
     for espece, gene in dico_espece_gene.items():
@@ -72,10 +73,6 @@ def extraire_info_uniprot(dico_espece_gene):
                 uniprot.append(dico_uniprot_entry)
     return uniprot
 
-
-dico = GeneSymbol()
-uniprot = extraire_info_uniprot(dico)
-
-print(uniprot)
-#fusionner les 3 dictionnaire en 1
-# nom de gene = gene_symbol
+# Pour tester
+fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
+print(extraire_info_uniprot(fichier))

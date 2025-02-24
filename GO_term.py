@@ -1,8 +1,5 @@
 import requests, json
 
-# creation dico 
-liste = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-
 # Création d'un dico avec {"espece" : "gene"}
 def GeneSymbol(filename) : 
     dico={}
@@ -21,9 +18,10 @@ def GeneSymbol(filename) :
 
 
 # Extraire les uniprot_ID
-def uniprot_ID (dico_espece) : 
+def uniprot_ID (filename) : 
 
     dico_uniprot={}
+    dico_espece = GeneSymbol(filename)
 
     for species, gene in dico_espece.items() :  
         url = f"https://rest.uniprot.org/uniprotkb/search?query=gene:{gene}+AND+{species}&format=json&fields=accession"
@@ -77,19 +75,18 @@ def QuickGO (uniprot_id) :
                                      
     return  dico_aspect
 
-def main_GO (dico_uniprot_id) : 
+def main_GO (filename = "GeneSymbols_45.txt") : 
 
     dico ={}
+    dico_uniprot_id = uniprot_ID(filename)
+
     for species, uniprot in dico_uniprot_id.items() :
         if uniprot : 
             res = QuickGO(uniprot)
             dico[species]=res
             
-    return dico 
+    return dico
 
-
-
-
-#dico_GeneSymbol = GeneSymbol(liste)
-#dico_uniprot_ID = uniprot_ID(dico_GeneSymbol)
-#print(main_GO(dico_uniprot_ID))
+# Pour tester
+fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
+print(main_GO(fichier))

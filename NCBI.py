@@ -95,14 +95,15 @@ def extract_info (gene_symbol, organism) :
 
     return   {"Gene Symbol " : gene_symbol,
               "Name" : name,
-              "Gene ID " : gene_id, 
+              "Gene ID" : gene_id, 
               "Protein" : protein_info, 
               "Transcript" : nucleotide_info
               }
 
 
-def main_NCBI (dico_sp) :
+def main_NCBI (filename) :
     dico_NCBI={}
+    dico_sp = GeneSymbol(filename)
     # faire un dico avec tout les infos pour tout les gene/espèce
     for species, gene in dico_sp.items() : 
         res = extract_info(gene_symbol= gene, organism= species)
@@ -111,8 +112,9 @@ def main_NCBI (dico_sp) :
 
 
 
-def lien_NCBI(dico_NCBI):
+def lien_NCBI(filename = "GeneSymbols_45.txt"):
     dico_lien = {}
+    dico_NCBI = main_NCBI(filename)
 
     # Pour chaque espèce et informations dans le dico, créer les liens NCBI correspondant  
     for species, info in dico_NCBI.items():
@@ -128,8 +130,6 @@ def lien_NCBI(dico_NCBI):
 
     return dico_lien
 
-
-fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-dico = GeneSymbol(fichier)
-dico_NCBI = main(dico_sp= dico)
-dico_lien_NCBI = lien_NCBI(dico_NCBI=dico_NCBI)
+# Pour tester
+#fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
+#print(lien_NCBI(fichier))
