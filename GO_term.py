@@ -25,9 +25,11 @@ def uniprot_ID (dico_espece) :
 
 
 
-def QuickGO (uniprot_id) :
+def QuickGO (dico_espece) :
 
     dico_aspect={}
+    uniprot_id = dico_espece["UniprotID"]
+
     # requete pour avoir le goID
     serveur = "https://www.ebi.ac.uk/QuickGO/services"
     ext1 = f"/annotation/search?geneProductId={uniprot_id}&limit=200&page=1"
@@ -47,27 +49,21 @@ def QuickGO (uniprot_id) :
                 results = data.get("results", [])
                 if results : 
                     go_name=results[0].get("name")
-                    #lien GO_term
-                    go_link = f"https://amigo.geneontology.org/amigo/term/{goID}"
-                    go= f"name: {go_name}, link: {go_link}"
                 if aspect not in dico_aspect:
                     dico_aspect[aspect]={}   # Créer un nouveau sous-dictionnaire si l'aspect n'existe pas encore
                 dico_aspect[aspect][goID] = set()
-                dico_aspect[aspect][goID].add(go)
+                dico_aspect[aspect][goID].add(go_name)
+
+                dico_espece["GO"]= dico_aspect
                                      
-    return  dico_aspect
+    return  dico_espece
 
-def main_GO (dico_species) : 
+def main_GO (dico_espece) : 
 
-    dico ={}
-    dico_uniprot_id = uniprot_ID(dico_species)
-
-    for species, uniprot in dico_uniprot_id.items() :
-        if uniprot : 
-            res = QuickGO(uniprot)
-            dico[species]=res
+    dico_espece = uniprot_ID(dico_espece)
+    dico_espece = QuickGO(dico_espece)
             
-    return dico
+    return dico_espece
 
 # Pour tester
 #fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
