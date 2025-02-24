@@ -63,6 +63,7 @@ def extraire_info_uniprot(filename = "GeneSymbols_45.txt"):
             # Stockage dans les dictionnaires
                 dico_uniprot_entry = {
                         'gene_symbol': gene,
+                        'species' : espece,
                         'uniprot_id': accession,
                         'uniprot_links': f'<a href="https://www.uniprot.org/uniprot/{accession}" target="_blank">{accession}</a>',
                         'protein_name': protein_name,
