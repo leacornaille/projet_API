@@ -65,7 +65,8 @@ def extraire_info_uniprot(dico_espece_gene):
                         'uniprot_id': accession,
                         'uniprot_links': f'<a href="https://www.uniprot.org/uniprot/{accession}" target="_blank">{accession}</a>',
                         'protein_name': protein_name,
-                        'pdb_id': pdb_entries
+                        'pdb_id': pdb_entries,
+                        'pdb_links': f'<a href="https://www.rcsb.org/structure/{pdb_entries}" target="_blank">{pdb_entries}</a>'
                     }
                 print(f"Ajouté: {dico_uniprot_entry}") 
                 uniprot.append(dico_uniprot_entry)
