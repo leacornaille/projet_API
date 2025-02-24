@@ -67,8 +67,12 @@ def extraire_info_uniprot(filename = "GeneSymbols_45.txt"):
                         'uniprot_links': f'<a href="https://www.uniprot.org/uniprot/{accession}" target="_blank">{accession}</a>',
                         'protein_name': protein_name,
                         'pdb_id': pdb_entries,
-                        'pdb_links': f'<a href="https://www.rcsb.org/structure/{pdb_entries}" target="_blank">{pdb_entries}</a>'
+                        'pdb_links': []
                     }
+                for pdb_entry in pdb_entries :
+                    dico_uniprot_entry["pdb_links"].append(f'<a href="https://www.rcsb.org/structure/{pdb_entry}" target="_blank">{pdb_entry}</a>' )
+                
+
                 print(f"Ajouté: {dico_uniprot_entry}") 
                 uniprot.append(dico_uniprot_entry)
     return uniprot
