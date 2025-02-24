@@ -1,9 +1,7 @@
 import requests
-from NCBI import GeneSymbol 
 
-def extraire_info_uniprot(filename = "GeneSymbols_45.txt"):
+def extraire_info_uniprot(dico_espece_gene):
 
-    dico_espece_gene = GeneSymbol(filename)
     uniprot =[]
     pdb_entries = []
     for espece, gene in dico_espece_gene.items():
@@ -64,13 +62,13 @@ def extraire_info_uniprot(filename = "GeneSymbols_45.txt"):
                 dico_uniprot_entry = {
                         'gene_symbol': gene,
                         'uniprot_id': accession,
-                        'uniprot_links': f'<a href="https://www.uniprot.org/uniprot/{accession}" target="_blank">{accession}</a>',
+                        'uniprot_links': f'<br>\n\t\t\t\t\t<a href="https://www.uniprot.org/uniprot/{accession}" target="_blank">{accession}</a>',
                         'protein_name': protein_name,
                         'pdb_id': pdb_entries,
                         'pdb_links': []
                     }
                 for pdb_entry in pdb_entries :
-                    dico_uniprot_entry["pdb_links"].append(f'<a href="https://www.rcsb.org/structure/{pdb_entry}" target="_blank">{pdb_entry}</a>' )
+                    dico_uniprot_entry["pdb_links"].append(f'<br>\n\t\t\t\t\t<a href="https://www.rcsb.org/structure/{pdb_entry}" target="_blank">{pdb_entry}</a>' )
                 
 
                 print(f"Ajouté: {dico_uniprot_entry}") 
