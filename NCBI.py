@@ -95,7 +95,7 @@ def extract_info (gene_symbol, organism) :
 
     return   {"Gene Symbol " : gene_symbol,
               "Name" : name,
-              "Gene ID " : gene_id, 
+              "Gene ID" : gene_id, 
               "Protein" : protein_info, 
               "Transcript" : nucleotide_info
               }
@@ -131,5 +131,5 @@ def lien_NCBI(dico_NCBI):
 
 fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
 dico = GeneSymbol(fichier)
-dico_NCBI = main(dico_sp= dico)
+dico_NCBI = main_NCBI(dico_sp= dico)
 dico_lien_NCBI = lien_NCBI(dico_NCBI=dico_NCBI)
