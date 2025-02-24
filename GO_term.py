@@ -1,4 +1,8 @@
-import requests, json
+# !/usr/bin/ python3
+#-*- coding : utf-8 -*-
+import requests
+import os
+import sys
 
 # Extraire les uniprot_ID
 def uniprot_ID (dico_espece) : 
@@ -51,8 +55,7 @@ def QuickGO (dico_espece) :
                     go_name=results[0].get("name")
                 if aspect not in dico_aspect:
                     dico_aspect[aspect]={}   # Créer un nouveau sous-dictionnaire si l'aspect n'existe pas encore
-                dico_aspect[aspect][goID] = set()
-                dico_aspect[aspect][goID].add(go_name)
+                dico_aspect[aspect][goID] = go_name
 
                 dico_espece["GO"]= dico_aspect
                                      
@@ -65,6 +68,22 @@ def main_GO (dico_espece) :
             
     return dico_espece
 
-# Pour tester
-#fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-#print(main_GO(fichier))
+# En cas de lancement par ligne de commande : lit le fichier en argument
+if __name__ == '__main__':
+    gene_symbols = sys.argv[1]
+    if os.path.isfile(gene_symbols): # Vérifie que l'argument soit un fichier
+        with open(gene_symbols, "r") as infos:
+            for line in infos:
+                symbol = line.split(",")[0]
+                current_species = line[:-1].split(",")[1]
+
+                # Dictionnaire initial à passer en argument aux sous-scripts
+                species_info = {}
+                species_info["species"] = current_species
+                species_info["gene_symbol"] = symbol
+
+                print("\t",main_GO(species_info))
+    else :
+        print("Erreur : Veuillez donnez un nom de fichier accessible comme seul argument \n"\
+              "Format de chaque ligne : [Symbole de gène],[Espèce] \n" \
+              "Ex: RAD51,homo_sapiens")
