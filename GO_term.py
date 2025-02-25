@@ -1,53 +1,39 @@
-import requests, json
-
-# creation dico 
-liste = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-
-# Création d'un dico avec {"espece" : "gene"}
-def GeneSymbol(filename) : 
-    dico={}
-    fichier = open(filename,'r')
-    lines = fichier.readlines()
-    for line in lines : 
-        line= line.strip()
-        if line : 
-            li = line.split(',')
-            species = li[1]
-            gene =li[0]
-            dico[species]=gene
-    return dico 
-
-
-
+# !/usr/bin/ python3
+#-*- coding : utf-8 -*-
+import requests
+import os
+import sys
 
 # Extraire les uniprot_ID
 def uniprot_ID (dico_espece) : 
 
-    dico_uniprot={}
+    gene = dico_espece["gene_symbol"]
+    species = dico_espece["species"]
+      
+    url = f"https://rest.uniprot.org/uniprotkb/search?query=gene:{gene}+AND+{species}&format=json&fields=accession"
+    response = requests.get(url)
 
-    for species, gene in dico_espece.items() :  
-        url = f"https://rest.uniprot.org/uniprotkb/search?query=gene:{gene}+AND+{species}&format=json&fields=accession"
-        response = requests.get(url)
-
-        if response.ok : 
-            data= response.json()
-            results =data.get("results", [])
-
-            if results : 
-                dico_uniprot[species] = results[0].get("primaryAccession") 
-            else : 
-                dico_uniprot[species] = None
-            
+    if response.ok : 
+        data= response.json()
+        results = data.get("results", [])
+        
+        if results : 
+            dico_espece["UniprotID"] = results[0].get("primaryAccession") 
         else : 
-            print(f"Aucune information trouver pour {species} : {gene} ")
+            dico_espece["UniprotID"] = None
+        
+    else : 
+        print(f"Aucune information trouver pour {species} : {gene} ")
  
-    return dico_uniprot
+    return dico_espece
 
 
 
-def QuickGO (uniprot_id) :
+def QuickGO (dico_espece) :
 
     dico_aspect={}
+    uniprot_id = dico_espece["UniprotID"]
+
     # requete pour avoir le goID
     serveur = "https://www.ebi.ac.uk/QuickGO/services"
     ext1 = f"/annotation/search?geneProductId={uniprot_id}&limit=200&page=1"
@@ -67,29 +53,37 @@ def QuickGO (uniprot_id) :
                 results = data.get("results", [])
                 if results : 
                     go_name=results[0].get("name")
-                    #lien GO_term
-                    go_link = f"https://amigo.geneontology.org/amigo/term/{goID}"
-                    go= f"name: {go_name}, link: {go_link}"
                 if aspect not in dico_aspect:
                     dico_aspect[aspect]={}   # Créer un nouveau sous-dictionnaire si l'aspect n'existe pas encore
-                dico_aspect[aspect][goID] = set()
-                dico_aspect[aspect][goID].add(go)
+                dico_aspect[aspect][goID] = go_name
+
+                dico_espece["GO"]= dico_aspect
                                      
-    return  dico_aspect
+    return  dico_espece
 
-def main_GO (dico_uniprot_id) : 
+def main_GO (dico_espece) : 
 
-    dico ={}
-    for species, uniprot in dico_uniprot_id.items() :
-        if uniprot : 
-            res = QuickGO(uniprot)
-            dico[species]=res
+    dico_espece = uniprot_ID(dico_espece)
+    dico_espece = QuickGO(dico_espece)
             
-    return dico 
+    return dico_espece
 
+# En cas de lancement par ligne de commande : lit le fichier en argument
+if __name__ == '__main__':
+    gene_symbols = sys.argv[1]
+    if os.path.isfile(gene_symbols): # Vérifie que l'argument soit un fichier
+        with open(gene_symbols, "r") as infos:
+            for line in infos:
+                symbol = line.split(",")[0]
+                current_species = line[:-1].split(",")[1]
 
+                # Dictionnaire initial à passer en argument aux sous-scripts
+                species_info = {}
+                species_info["species"] = current_species
+                species_info["gene_symbol"] = symbol
 
-
-#dico_GeneSymbol = GeneSymbol(liste)
-#dico_uniprot_ID = uniprot_ID(dico_GeneSymbol)
-#print(main_GO(dico_uniprot_ID))
+                print("\t",main_GO(species_info))
+    else :
+        print("Erreur : Veuillez donnez un nom de fichier accessible comme seul argument \n"\
+              "Format de chaque ligne : [Symbole de gène],[Espèce] \n" \
+              "Ex: RAD51,homo_sapiens")
