@@ -131,5 +131,5 @@ def lien_NCBI(filename = "GeneSymbols_45.txt"):
     return dico_lien
 
 # Pour tester
-fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
-print(lien_NCBI(fichier))
+#fichier = input("Entrez un fichier avec pour chaque ligne gene,espece : ")
+#print(lien_NCBI(fichier))
