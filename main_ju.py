@@ -2,7 +2,6 @@
 #-*- coding : utf-8 -*-
 import sys
 import ensembl
-import NCBI
 import GO_term
 import uniprotKB
 
@@ -24,7 +23,7 @@ with open("GeneSymbols_45.txt", "r") as infos:
         embl_info = ensembl.InfoGene(species_info)
         #ncbi_info = NCBI.Info(species_info)
         go_info = GO_term.main_GO(species_info)
-        uniprot_info = uniprotKB(species_info)
+        uniprot_info = uniprotKB.extraire_info_uniprot(species_info)
 
         link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}" # Raccourci
         
@@ -61,13 +60,13 @@ with open("GeneSymbols_45.txt", "r") as infos:
             bp = go_info["GO"]["biological_process"]
             cc = go_info["GO"]["cellular_component"]
 
-            for key, value in mf :
+            for key, value in mf.items() :
                 mf_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
 
-            for key, value in bp :
+            for key, value in bp.items() :
                 bp_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
 
-            for key, value in cc :
+            for key, value in cc.items() :
                 cc_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
 
         # En cas d'absence d'UniprotID
@@ -94,10 +93,10 @@ with open("GeneSymbols_45.txt", "r") as infos:
                         {embl_transcript}
                     </td>
                     <td>
-                        {"".join(uniprot_info[0]["uniprot_links"])}
+                        {"".join(uniprot_info["uniprot_links"])}
                     </td>
                     <td>
-                        {"".join(uniprot_info[0]["pdb_links"])}
+                        {"".join(uniprot_info["pdb_links"])}
                     </td>
                     <td>
                         {bp_link}
