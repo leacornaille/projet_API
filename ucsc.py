@@ -25,7 +25,7 @@ def ucsc_link(gene,species_name):
         # Ne conserver que le dernier génome trouvé pour l'espèce
             last_genome = list(filtered_genomes.keys())[-1]  # Dernier génome dans la liste triée
             genome_browser = {"gene_symbol": gene, "genome": last_genome, "species": species_name, 
-                                "lien_ucsc":f'</br>\n\t\t\t\t\t<a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db={last_genome}&position={gene}">{gene}</a>' }
+                                "lien_ucsc":f'<a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db={last_genome}&position={gene}">{gene}</a>' }
         else:
             genome_browser = {"gene_symbol": gene, "genome": "Aucun genome trouvé", "species": species_name,"lien_ucsc": "Non présent sur l'UCSC"}
     return genome_browser
