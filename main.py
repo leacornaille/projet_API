@@ -41,7 +41,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             species_info_ucsc = {}
             species_info_ucsc["species"] = current_species_ss
             species_info_ucsc["gene_symbol"] = symbol
-            print(species_info_ucsc)
+            print(f"Gène '{species_info_ucsc["gene_symbol"]}' de l'espèce '{species_info_ucsc["species"]}' en cours de traitement...")
 
         # Appel des fonctions principales des sous-scripts
             embl_info = ensembl.InfoGene(species_info)
