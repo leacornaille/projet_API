@@ -7,4 +7,4 @@ DMD,mus_musculus
 DPP,Drosophila_melanogaster
 TGFBR2,gallus_gallus
 APP,rattus_norvegicus
-MYF5,Felis_catus 
+MYF5,Felis_catus
