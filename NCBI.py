@@ -78,13 +78,13 @@ def extract_info (gene_symbol, organism, mail) :
         nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore', mail) or ["Data not found"]
 
         #Creaction des lien
-        lien_RNA = [ f'<br>\n\t\t\t\t\t<a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank">{rna}</a>'
+        lien_RNA = [ f'<br><a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank">{rna}</a>'
                          for rna in nucleotide_info ] if nucleotide_info[0]!= "Data not found" else ["Data not found"]
 
-        lien_prot = [f'<br>\n\t\t\t\t\t<a href="https://www.ncbi.nlm.nih.gov/protein/{prot}" target="_blank">{prot}</a>' 
+        lien_prot = [f'<br><a href="https://www.ncbi.nlm.nih.gov/protein/{prot}" target="_blank">{prot}</a>' 
                           for prot in protein_info ] if protein_info[0]!= "Data not found" else ["Data not found"]
 
-        lien_gene =  [f'<br>\n\t\t\t\t\t<a href="https://www.ncbi.nlm.nih.gov/gene/{gene_id[0]}" target="_blank">{gene_id[0]}</a>']
+        lien_gene =  [f'<a href="https://www.ncbi.nlm.nih.gov/gene/{gene_id[0]}" target="_blank">{gene_id[0]}</a>']
 
 
     return   {"Species" : organism,

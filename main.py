@@ -135,7 +135,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                             {ncbi_info['Official name']}
                         </td>
 
-                        <td><a href = {link}/Gene/Summary?db=core;g={embl_info['gene_id']}>
+                        <td><a href = "{link}/Gene/Summary?db=core;g={embl_info['gene_id']}" target="_blank">
                             {embl_info["gene_id"]}
                         </a></td>
 
@@ -143,7 +143,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                             {"".join(ncbi_info['Links gene'])}                            
                         </td>
 
-                        <td><a href = {embl_info["gene_browser"]}>
+                        <td><a href = "{embl_info["gene_browser"]}" target="_blank">
                             View {embl_info["gene_symbol"]} in Ensembl genome browser
                         </a><br>
                             {ucsc_link["lien_ucsc"]}
@@ -359,4 +359,5 @@ if __name__ == '__main__':
     filename_output = args[2]
     html_table(filename_input, mail, filename_output)
     print(f"Fichier HTML {filename_output} créée")
-    print(time.ctime(time.time() - start)[11:19])
+    temps = time.ctime(time.time() - start)[11:19]
+    print(f"Temps d'exécution : {temps}")
