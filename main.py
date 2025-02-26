@@ -21,12 +21,14 @@ def html_table(file, mail) :
 
             # Dictionnaire initial à passer en argument aux sous-scripts
             species_info = {}
-            species_info_ncbi_uniprot = {}
-            species_info_ucsc = {}
             species_info["species"] = current_species
             species_info["gene_symbol"] = symbol
+
+            species_info_ncbi_uniprot = {}
             species_info_ncbi_uniprot["species"] = current_species_ss_gca
             species_info_ncbi_uniprot["gene_symbol"] = symbol
+
+            species_info_ucsc = {}
             species_info_ucsc["species"] = current_species_ss
             species_info_ucsc["gene_symbol"] = symbol
             print(species_info_ucsc)
@@ -34,7 +36,7 @@ def html_table(file, mail) :
         # Appel des fonctions principales des sous-scripts
             embl_info = ensembl.InfoGene(species_info)
             go_info = GO_term.main_GO(species_info_ncbi_uniprot)
-            uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
+            uniprot_info = uniprotKB.extraire_info_uniprot(species_info)
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
 
@@ -73,79 +75,94 @@ def html_table(file, mail) :
         ## Liens GO term
             # Faire les liens si un UniprotID a été trouvé
             if go_info["UniprotID"] != None :
-                mf = go_info["GO"]["molecular_function"]
-                bp = go_info["GO"]["biological_process"]
-                cc = go_info["GO"]["cellular_component"]
+                try :
+                    mf = go_info["GO"]["molecular_function"]
+                    bp = go_info["GO"]["biological_process"]
+                    cc = go_info["GO"]["cellular_component"]
 
-                # Initialisation des variables de liens
-                mf_link = ""
-                bp_link = ""
-                cc_link =""
+                    # Initialisation des variables de liens
+                    mf_link = ""
+                    bp_link = ""
+                    cc_link =""
 
-                # Création et concaténation des liens
-                for key, value in mf.items() :
-                    mf_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                    # Création et concaténation des liens
+                    for key, value in mf.items() :
+                        mf_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
-                for key, value in bp.items() :
-                    bp_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                    for key, value in bp.items() :
+                        bp_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
-                for key, value in cc.items() :
-                    cc_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                    for key, value in cc.items() :
+                        cc_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
             # En cas d'absence d'UniprotID
-            else :
-                mf_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
-                bp_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
-                cc_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
+                except :
+                    mf_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
+                    bp_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
+                    cc_link = "<br>\n\t\t\t\t\t<p>Data not found</p>"
 
             body_html += f"""
                     <tr>                    
                         <td><div class=header_1>
                             {embl_info['species']}
                         </div></td>
+                        
                         <td>
                             {embl_info["gene_symbol"]}
                         </td>
+
                         <td><a href = {embl_info["gene_browser"]}>
                             View {embl_info["gene_symbol"]} in gene browser
                         </a></td>
+
                         <td><a href = {link}/Gene/Summary?db=core;g={embl_info['gene_id']}>
                             {embl_info["gene_id"]}
                         </a></td>
-                        <td>
+
+                        <td><div class='scroll'>
                             {embl_transcript}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {embl_prot}
-                        </td>
-                        <td>{"".join(ncbi_info['Links gene'])}
-                            
-                        </td>
-                        <td>{"".join(ncbi_info['Links RNA'])}
-                            
-                        </td>
-                        <td>{"".join(ncbi_info['Links prot'])}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>{"".join(ncbi_info['Links gene'])}                            
+                        </div></td>
+
+                        <td><div class='scroll'>{"".join(ncbi_info['Links RNA'])}                            
+                        </div></td>
+
+                        <td><div class='scroll'>{"".join(ncbi_info['Links prot'])}
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {"".join(uniprot_info["uniprot_links"])}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {uniprot_info['protein_name']}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {"".join(uniprot_info["pdb_links"])}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {bp_link}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {mf_link}
-                        </td>
-                        <td>
+                        </div></td>
+
+                        <td><div class='scroll'>
                             {cc_link}
-                        </td>
-                        <td>{ucsc_link["lien_ucsc"]}
-                        </td>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            {ucsc_link["lien_ucsc"]}
+                        </div></td>
                     </tr>"""
 
     ## HTML Head
@@ -211,7 +228,13 @@ def html_table(file, mail) :
                         },                                       
                     });
                 });
-                </script>
+
+                .scroll {white-space:nowrap;
+                        max-height: 120px;
+                        max-width: 230px;
+                        overflow: auto;
+	            }
+            </script>
         </head>
         <body>
             <h1>Resultat du scripting d'aggrégation automatique des annotations</h1>
