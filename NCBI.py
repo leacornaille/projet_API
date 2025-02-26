@@ -4,9 +4,9 @@
 from Bio import Entrez 
 import json 
 
-Entrez.email = "lin.christine0@gmail.com"
 
-def get_gene_id (gene_name, organism) : 
+def get_gene_id (gene_name, organism, mail) : 
+    Entrez.email = mail
 
     # extraction des ID pour chaque gene ID 
     handle=Entrez.esearch(db="gene", term = f'{organism} [Orgn] AND {gene_name} [gene]')
@@ -25,7 +25,8 @@ def get_gene_id (gene_name, organism) :
     return ids, official_name
 
 
-def get_linked_ids (gene_ids, target_db ) : 
+def get_linked_ids (gene_ids, target_db, mail) : 
+    Entrez.email = mail
 
     # Requete pour avoir les IDs dans les autres db à partir du gene ID 
     handle = Entrez.elink(dbfrom = "gene", db= target_db, id = gene_ids, retmode= 'json')
@@ -41,8 +42,9 @@ def get_linked_ids (gene_ids, target_db ) :
     return linked_ids
 
 
-def get_seq_info (seq_ids, db) : 
-    
+def get_seq_info (seq_ids, db, mail) : 
+    Entrez.email = mail
+
     sequences = []
     
     # Requete pour avoir les RNA number acces ou transcrit number access selon la db 
@@ -62,18 +64,18 @@ def get_seq_info (seq_ids, db) :
     return sequences
 
 
-def extract_info (gene_symbol, organism) : 
+def extract_info (gene_symbol, organism, mail) : 
 
-    gene_id, official_name = get_gene_id(gene_symbol, organism)
+    gene_id, official_name = get_gene_id(gene_symbol, organism, mail)
 
     if gene_id :
         # extraction des ids pour les db prot et nucléotide
-        protein_ids = get_linked_ids(gene_id, "protein")  # db protein
-        nucleotide_ids = get_linked_ids(gene_id, 'nuccore') # db nucleotide
+        protein_ids = get_linked_ids(gene_id, "protein", mail)  # db protein
+        nucleotide_ids = get_linked_ids(gene_id, 'nuccore', mail) # db nucleotide
 
         # extraction des numéros d'access prot et transcrit
-        protein_info = get_seq_info(protein_ids, "protein") or ["data not found"]
-        nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore') or ["data not found"]
+        protein_info = get_seq_info(protein_ids, "protein", mail) or ["data not found"]
+        nucleotide_info = get_seq_info(nucleotide_ids, 'nuccore', mail) or ["data not found"]
 
         #Creaction des lien
         lien_RNA = [ f'<br>\n\t\t\t\t\t<a href="https://www.ncbi.nlm.nih.gov/nuccore/{rna}" target="_blank">{rna}</a>'
