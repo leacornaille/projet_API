@@ -6,6 +6,9 @@ import GO_term
 import uniprotKB
 import NCBI
 import ucsc
+import time
+
+start = time.time()
 
 def html_table(file, mail, filename_output) :
     """
@@ -139,7 +142,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
 
                         <td><a href = {embl_info["gene_browser"]}>
                             View {embl_info["gene_symbol"]} in Ensembl genome browser
-                        </a>
+                        </a><br>
                             {ucsc_link["lien_ucsc"]}
                         </td>
 
@@ -288,7 +291,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
 
         <body>
             <div class="header">
-            <h1>Gene Annotation Automatic Table</h1>
+            <h1>Automatic Gene Annotation Table</h1>
             </div>
             <table id="gene" class="display nowrap cell-border" style="width:100%">
                 <thead>
@@ -297,15 +300,15 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                         <th>Gene Symbol</th>
                         <th>Division</th>
                         <th>Official Full Name</th>
-                        <th>Gene Access Number</th>
-                        <th>Gene Access Number</th>
+                        <th>Gene Access Number - ENSEMBL</th>
+                        <th>Gene Access Number - NCBI</th>
                         <th>Genome Browser</th>
-                        <th>RNA Access Numbers</th>
-                        <th>RNA Access Numbers</th>
+                        <th>RNA Access Numbers - ENSEMBL</th>
+                        <th>RNA Access Numbers - NCBI</th>
                         <th>Protein Name</th>
-                        <th>Protein Access Numbers</th>
-                        <th>Protein Access Numbers</th>
-                        <th>Protein Access Numbers</th>
+                        <th>Protein Access Numbers - ENSEMBL</th>
+                        <th>Protein Access Numbers - NCBI</th>
+                        <th>Protein Access Numbers - UniProt</th>
                         <th>3D structure - PDB</th>
                         <th>Biological process - GO term</th>
                         <th>Molecular function - GO term</th>
@@ -336,3 +339,5 @@ if __name__ == '__main__':
     mail = args[1]
     filename_output = args[2]
     html_table(filename, mail, filename_output)
+    print(f"Fichier HTML {filename_output} créée")
+    print(time.ctime(time.time() - start)[11:19])
