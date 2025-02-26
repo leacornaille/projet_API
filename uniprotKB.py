@@ -50,7 +50,7 @@ def extraire_info_uniprot(dico_espece_gene):
         for xref in entry.get("uniProtKBCrossReferences", []):
             if xref.get("database") == "PDB":
                 pdb_entries.append(xref.get("id"))
-
+        
         # Mise à jour du dictionnaire
         dico_uniprot_entry.update({
             'uniprot_id': accession,
@@ -59,6 +59,10 @@ def extraire_info_uniprot(dico_espece_gene):
             'pdb_id': pdb_entries,
             'pdb_links': [f'<br>\n\t\t\t\t\t<a href="https://www.rcsb.org/structure/{pdb}" target="_blank">{pdb}</a>' for pdb in pdb_entries]
         })
+
+        if pdb_entries == [] :
+            dico_uniprot_entry["pdb_id"] = ["Data not found"]
+            dico_uniprot_entry["pdb_links"] = ["<br>\n\t\t\t\t\tData not found"]
 
     return dico_uniprot_entry
 
