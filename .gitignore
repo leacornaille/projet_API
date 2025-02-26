@@ -1,1 +1,6 @@
 tests.ipynb
+__pycache__/ensembl.cpython-312.pyc
+__pycache__/GO_term.cpython-312.pyc
+__pycache__/NCBI.cpython-312.pyc
+__pycache__/ucsc.cpython-312.pyc
+__pycache__/uniprotKB.cpython-312.pyc

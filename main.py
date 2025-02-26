@@ -232,13 +232,38 @@ def html_table(file, mail) :
                         },                                       
                     });
                 });
-
-                .scroll {white-space:nowrap;
-                        max-height: 120px;
-                        max-width: 230px;
-                        overflow: auto;
-	            }
             </script>
+
+            <style>
+                body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                font-size: 16px;
+                color: #333;
+                }
+
+                .header {
+                background-color: #33893d;
+                color: #ffffff;
+                padding: 20px 0;
+                text-align: center;
+                margin-bottom: 20px;
+                }
+
+                h1 {
+                font-size: 24px;
+                }
+
+                .scroll {
+                overflow: auto;
+                max-height: 200px;
+                }
+
+                .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+                color: #333;
+                }
+            </style>
         </head>
         <body>
             <h1>Resultat du scripting d'aggrégation automatique des annotations</h1>
