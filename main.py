@@ -211,6 +211,8 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.min.js"></script>
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.colVis.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.min.js"></script>
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/colreorder/2.0.4/js/dataTables.colReorder.min.js"></script>
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedcolumns/5.0.4/js/dataTables.fixedColumns.min.js"></script>
             <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
@@ -225,10 +227,17 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                         layout: { 
                             topStart : 'pageLength',
                             top1Start: {
-                                buttons: [{
+                                buttons: [
+                                    {
                                         extend: 'colvis',
                                         columns: 'th:nth-child(n+2)'
-                                    }]
+                                    },
+                                    {
+                                        extend: 'collection',
+                                        text: 'Export',
+                                        buttons: ['csv','excel']
+                                    }
+                                ]
                             },
                             bottomStart: 'pageLength',
                             bottom1Start: {
@@ -240,10 +249,9 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                                     {
                                         extend: 'collection',
                                         text: 'Export',
-                                        buttons: ['csv', 'excel', 'pdf']
+                                        buttons: ['csv','excel']
                                     }
                                 ]
-
                             },
                             topEnd : "paging",
                             top1End : "search",
