@@ -10,7 +10,7 @@ import time
 
 start = time.time()
 
-def html_table(file, mail, filename_output) :
+def html_table(filename_input, mail, filename_output) :
     """
 Point d'entrée principal du script.
 
@@ -22,11 +22,13 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
     body_html ="" # Initialisation du corps du HTML
 
     # Boucle à travers le fichier d'origine pour créer les lignes du tableau
-    with open(file, "r") as infos:
-        for line in infos:        
+    with open(filename_input, "r") as infos:
+        for line in infos:
+            #Formatage des noms d'espèces pour les différentes requêtes        
             current_species = line[:-1].split(",")[1]
             current_species_ss_gca = current_species.split("_gca")[0]
             current_species_ss = current_species_ss_gca.replace("_"," ").capitalize()
+
             symbol = line.split(",")[0]
 
             # Dictionnaire initial à passer en argument aux sous-scripts
@@ -50,28 +52,28 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
 
-            link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}"  # Raccourci
-            
             if embl_info['division'] == 'vertebrates':
-                link = f"https://www.ensembl.org/{embl_info['species'].capitalize()}"
+                link = f'https://www.ensembl.org/{embl_info['species'].capitalize()}'
+            else :
+                link = f'https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}'  # Raccourci
 
         ## Liens Ensembl pour protéines et transcrits
             # Initialisation : Premiers lien Ensembl
             transcript = embl_info["transcript_id"][0]
-            embl_transcript = f"<a href = {link}/Transcript/Summary?db=core;g={embl_info["species"]};t={transcript}>{transcript}</a>"
+            embl_transcript = f'<a href = "{link}/Transcript/Summary?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{transcript}</a>'
             if embl_info["prot_id"][0] == "Not translated": # En cas de non traduction
                 embl_prot = "<a>Not translated</a>"
             else :
                 if embl_info['division'] == 'bacteria':
-                    embl_prot = f"<a href = {link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info["species"]};t={transcript}>{embl_info["prot_id"][0]}</a>"
+                    embl_prot = f'<a href = "{link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{embl_info["prot_id"][0]}</a>'
                 else:
-                    embl_prot = f"<a href = {link}/Transcript/ProteinSummary?db=core;g={embl_info["species"]};t={transcript}>{embl_info["prot_id"][0]}</a>"
+                    embl_prot = f'<a href = "{link}/Transcript/ProteinSummary?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{embl_info["prot_id"][0]}</a>'
 
 
             # Suite des liens Ensembl
             for i in range(1, len(embl_info["transcript_id"])):
                 transcript = embl_info["transcript_id"][i]
-                embl_transcript += f"<br>\n\t\t\t\t\t<a href = {link}/Transcript/Summary?db=core;g={embl_info['species']};t={transcript}>{transcript}</a>"
+                embl_transcript += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/Summary?db=core;g={embl_info['species']};t={transcript}" target="_blank">{transcript}</a>'
 
                 # Vérifie si l'index 'i' est valide pour 'prot_id'
                 if i < len(embl_info["prot_id"]):
@@ -79,12 +81,13 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                         embl_prot += "<br>\n\t\t\t\t\t<a>Not translated</a>"
                     else:
                         if embl_info['division'] == 'bacteria':
-                            embl_prot += f"<br>\n\t\t\t\t\t<a href = {link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info['species']};t={transcript}>{embl_info['prot_id'][i]}</a>"
+                            embl_prot += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info['species']};t={transcript}" target="_blank">{embl_info['prot_id'][i]}</a>'
                         else:
-                            embl_prot += f"<br>\n\t\t\t\t\t<a href = {link}/Transcript/ProteinSummary?db=core;g={embl_info['species']};t={transcript}>{embl_info['prot_id'][i]}</a>"
+                            embl_prot += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary?db=core;g={embl_info['species']};t={transcript}" target="_blank">{embl_info['prot_id'][i]}</a>'
                 else:
                     # Si 'prot_id' n'a pas d'élément pour cet 'i', afficher un message indiquant que ce n'est pas traduit
                     embl_prot += "<br>\n\t\t\t\t\t<a>Not translated</a>"
+                    
         ## Liens GO term
             # Faire les liens si un UniprotID a été trouvé
             if go_info["UniprotID"] != None :
@@ -100,13 +103,13 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
 
                     # Création et concaténation des liens
                     for key, value in mf.items() :
-                        mf_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                        mf_link += f'<br>\n\t\t\t\t\t<a href = "https://amigo.geneontology.org/amigo/term/{key}" target="_blank">{key}</a> : {value}'
 
                     for key, value in bp.items() :
-                        bp_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                        bp_link += f'<br>\n\t\t\t\t\t<a href = "https://amigo.geneontology.org/amigo/term/{key}" target="_blank">{key}</a> : {value}'
 
                     for key, value in cc.items() :
-                        cc_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
+                        cc_link += f'<br>\n\t\t\t\t\t<a href = "https://amigo.geneontology.org/amigo/term/{key}" target="_blank">{key}</a> : {value}'
 
             # En cas d'absence d'UniprotID
                 except :
@@ -351,9 +354,9 @@ if __name__ == '__main__':
     if len(args) < 3:
         print("Usage: python3 main.py <fichier_genes> <email> <nom_fichier_sortie>")
         sys.exit(1)
-    filename = args[0]
+    filename_input = args[0]
     mail = args[1]
     filename_output = args[2]
-    html_table(filename, mail, filename_output)
+    html_table(filename_input, mail, filename_output)
     print(f"Fichier HTML {filename_output} créée")
     print(time.ctime(time.time() - start)[11:19])
