@@ -232,10 +232,18 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                             },
                             bottomStart: 'pageLength',
                             bottom1Start: {
-                                buttons: [{
+                                buttons: [
+                                    {
                                         extend: 'colvis',
                                         columns: 'th:nth-child(n+2)'
-                                    }]
+                                    },
+                                    {
+                                        extend: 'collection',
+                                        text: 'Export',
+                                        buttons: ['csv', 'excel', 'pdf']
+                                    }
+                                ]
+
                             },
                             topEnd : "paging",
                             top1End : "search",
