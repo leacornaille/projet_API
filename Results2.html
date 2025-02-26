@@ -1,0 +1,1492 @@
+    <!DOCTYPE HTML>
+    <html lang="fr-FR">
+        <head>
+            <title>Results : Gene Annotation Automatic Table</title>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <!-- CSS -->
+            <link type="text/css" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/colreorder/2.0.4/css/colReorder.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/fixedheader/4.0.1/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/fixedcolumns/5.0.4/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.min.css" rel="stylesheet">
+            <link type="text/css" href="https://cdn.datatables.net/rowreorder/1.5.0/css/rowReorder.dataTables.min.css" rel="stylesheet">
+
+            <!-- JavaScript -->
+            <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script> 
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.colVis.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/colreorder/2.0.4/js/dataTables.colReorder.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedcolumns/5.0.4/js/dataTables.fixedColumns.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.min.js"></script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/rowreorder/1.5.0/js/dataTables.rowReorder.min.js"></script>
+
+            <!-- Script Supplémentaire-->
+            <script type="text/javascript" class="init">
+                $(document).ready(function() {
+                    $('#gene').DataTable({
+                        <!--Configure le placement des éléments autour du tableau-->
+                        layout: { 
+                            topStart : 'pageLength',
+                            top1Start: {
+                                buttons: [{
+                                        extend: 'colvis',
+                                        columns: 'th:nth-child(n+2)'
+                                    }]
+                            },
+                            bottomStart: 'pageLength',
+                            bottom1Start: {
+                                buttons: [{
+                                        extend: 'colvis',
+                                        columns: 'th:nth-child(n+2)'
+                                    }]
+                            },
+                            topEnd : "paging",
+                            top1End : "search",
+                            bottomEnd : "paging",
+                            bottom1End : "search",
+                        },
+                        fixedHeader: true,
+                        scrollY: true,
+                        scrollX: true,
+                        lengthMenu: [5, 10, 25, 50, 75, 100],
+                        fixedColumns: {
+                          leftColumns: 2
+                        },
+                        colReorder: {
+                            columns: ':gt(1)'
+                        },                                       
+                    });
+                });
+            </script>
+
+            <style>
+
+            h1{
+                padding-top: 40px;
+                padding-bottom: 40px;
+                text-align: center;
+            }
+
+            .header{
+                background-color: #E8E8E8;
+                margin: 0 ;
+                height: 120px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            a{
+                color: black;
+            }
+            
+            .scroll {white-space:nowrap;
+                max-height: 120px;
+                max-width: 230px;
+                overflow: auto;
+	        }
+            
+            td{
+                text-align: justify;
+            }
+
+            </style>
+        </head>
+
+        <body>
+            <div class="header">
+            <h1>Gene Annotation Automatic Table</h1>
+            </div>
+            <table id="gene" class="display nowrap cell-border" style="width:100%">
+                <thead>
+                    <tr>
+                        <th><div class=header_1>Organism</div></th>
+                        <th>Gene Symbol</th>
+                        <th>Division</th>
+                        <th>Official Full Name</th>
+                        <th>Gene Access Number</th>
+                        <th>Gene Access Number</th>
+                        <th>Genome Browser</th>
+                        <th>RNA Access Numbers</th>
+                        <th>RNA Access Numbers</th>
+                        <th>Protein Name</th>
+                        <th>Protein Access Numbers</th>
+                        <th>Protein Access Numbers</th>
+                        <th>Protein Access Numbers</th>
+                        <th>3D structure - PDB</th>
+                        <th>Biological process - GO term</th>
+                        <th>Molecular function - GO term</th>
+                        <th>Cellular component - GO term</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr>                    
+                        <td><div class=header_1>
+                            homo_sapiens
+                        </div></td>
+                        
+                        <td>
+                            RAD51
+                        </td>
+
+                        <td>
+                            vertebrates
+                        </td>
+
+                        <td>
+                            RAD51 recombinase
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000051180>
+                            ENSG00000051180
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/5888" target="_blank">5888</a>                            
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Homo_sapiens/Location/View?db=core;g=ENSG00000051180>
+                            View RAD51 in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hs1&position=RAD51">View RAD51 in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000527860>ENST00000527860</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000423169>ENST00000423169</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000557850>ENST00000557850</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000382643>ENST00000382643</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000267868>ENST00000267868</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000645673>ENST00000645673</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000525066>ENST00000525066</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000526763>ENST00000526763</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000532743>ENST00000532743</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000531277>ENST00000531277</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=homo_sapiens;t=ENST00000533741>ENST00000533741</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378571.1" target="_blank">XM_054378571.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378570.1" target="_blank">XM_054378570.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378569.1" target="_blank">XM_054378569.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378568.1" target="_blank">XM_054378568.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378567.1" target="_blank">XM_054378567.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_054378566.1" target="_blank">XM_054378566.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_047432925.1" target="_blank">XM_047432925.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_011521861.3" target="_blank">XM_011521861.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_011521858.3" target="_blank">XM_011521858.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_011521859.3" target="_blank">XM_011521859.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_011521860.3" target="_blank">XM_011521860.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_011521857.3" target="_blank">XM_011521857.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001164269.2" target="_blank">NM_001164269.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001164270.2" target="_blank">NM_001164270.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_133487.4" target="_blank">NM_133487.4</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_002875.5" target="_blank">NM_002875.5</a>                            
+                        </div></td>
+                        
+                        <td>
+                            DNA repair protein RAD51 homolog 1
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000527860>ENSP00000432759</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000423169>ENSP00000406602</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000557850>ENSP00000454176</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000382643>ENSP00000372088</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000267868>ENSP00000267868</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000645673>ENSP00000493712</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000525066>ENSP00000431864</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000526763>ENSP00000431897</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000532743>ENSP00000433924</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000531277>ENSP00000436512</a><br>
+					<a href = https://www.ensembl.org/Homo_sapiens/Transcript/ProteinSummary?db=core;g=homo_sapiens;t=ENST00000533741>ENSP00000433053</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234546.1" target="_blank">XP_054234546.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234545.1" target="_blank">XP_054234545.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234544.1" target="_blank">XP_054234544.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234543.1" target="_blank">XP_054234543.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234542.1" target="_blank">XP_054234542.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_054234541.1" target="_blank">XP_054234541.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_047288881.1" target="_blank">XP_047288881.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_011520163.2" target="_blank">XP_011520163.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_011520159.2" target="_blank">XP_011520159.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_011520162.1" target="_blank">XP_011520162.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_011520161.1" target="_blank">XP_011520161.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_011520160.1" target="_blank">XP_011520160.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001157742.1" target="_blank">NP_001157742.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001157741.1" target="_blank">NP_001157741.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_597994.3" target="_blank">NP_597994.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_002866.2" target="_blank">NP_002866.2</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/Q06609" target="_blank">Q06609</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.rcsb.org/structure/1B22" target="_blank">1B22</a><br>
+					<a href="https://www.rcsb.org/structure/1N0W" target="_blank">1N0W</a><br>
+					<a href="https://www.rcsb.org/structure/5H1B" target="_blank">5H1B</a><br>
+					<a href="https://www.rcsb.org/structure/5H1C" target="_blank">5H1C</a><br>
+					<a href="https://www.rcsb.org/structure/5JZC" target="_blank">5JZC</a><br>
+					<a href="https://www.rcsb.org/structure/5NP7" target="_blank">5NP7</a><br>
+					<a href="https://www.rcsb.org/structure/5NWL" target="_blank">5NWL</a><br>
+					<a href="https://www.rcsb.org/structure/7C9A" target="_blank">7C9A</a><br>
+					<a href="https://www.rcsb.org/structure/7EJC" target="_blank">7EJC</a><br>
+					<a href="https://www.rcsb.org/structure/7EJE" target="_blank">7EJE</a><br>
+					<a href="https://www.rcsb.org/structure/8BQ2" target="_blank">8BQ2</a><br>
+					<a href="https://www.rcsb.org/structure/8BR2" target="_blank">8BR2</a><br>
+					<a href="https://www.rcsb.org/structure/8BSC" target="_blank">8BSC</a><br>
+					<a href="https://www.rcsb.org/structure/8GYK" target="_blank">8GYK</a><br>
+					<a href="https://www.rcsb.org/structure/8JND" target="_blank">8JND</a><br>
+					<a href="https://www.rcsb.org/structure/8JNE" target="_blank">8JNE</a><br>
+					<a href="https://www.rcsb.org/structure/8JNF" target="_blank">8JNF</a><br>
+					<a href="https://www.rcsb.org/structure/8PBC" target="_blank">8PBC</a><br>
+					<a href="https://www.rcsb.org/structure/8PBD" target="_blank">8PBD</a><br>
+					<a href="https://www.rcsb.org/structure/8R64" target="_blank">8R64</a><br>
+					<a href="https://www.rcsb.org/structure/8RCD" target="_blank">8RCD</a><br>
+					<a href="https://www.rcsb.org/structure/8RCF" target="_blank">8RCF</a><br>
+					<a href="https://www.rcsb.org/structure/8XBT" target="_blank">8XBT</a><br>
+					<a href="https://www.rcsb.org/structure/8XBU" target="_blank">8XBU</a><br>
+					<a href="https://www.rcsb.org/structure/8XBV" target="_blank">8XBV</a><br>
+					<a href="https://www.rcsb.org/structure/8XBW" target="_blank">8XBW</a><br>
+					<a href="https://www.rcsb.org/structure/8XBX" target="_blank">8XBX</a><br>
+					<a href="https://www.rcsb.org/structure/8XBY" target="_blank">8XBY</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000724>GO:0000724</a> : double-strand break repair via homologous recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000722>GO:0000722</a> : telomere maintenance via recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000730>GO:0000730</a> : DNA recombinase assembly<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006281>GO:0006281</a> : DNA repair<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006310>GO:0006310</a> : DNA recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006312>GO:0006312</a> : mitotic recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006974>GO:0006974</a> : DNA damage response<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007127>GO:0007127</a> : meiosis I<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007131>GO:0007131</a> : reciprocal meiotic recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009410>GO:0009410</a> : response to xenobiotic stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009636>GO:0009636</a> : response to toxic substance<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010165>GO:0010165</a> : response to X-ray<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010569>GO:0010569</a> : regulation of double-strand break repair via homologous recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010833>GO:0010833</a> : telomere maintenance via telomere lengthening<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014070>GO:0014070</a> : obsolete response to organic cyclic compound<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031297>GO:0031297</a> : replication fork processing<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0032200>GO:0032200</a> : telomere organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0036297>GO:0036297</a> : interstrand cross-link repair<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042148>GO:0042148</a> : DNA strand invasion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0051321>GO:0051321</a> : meiotic cell cycle<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070192>GO:0070192</a> : chromosome organization involved in meiotic cell cycle<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0071312>GO:0071312</a> : cellular response to alkaloid<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0071479>GO:0071479</a> : cellular response to ionizing radiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0071480>GO:0071480</a> : cellular response to gamma radiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0072711>GO:0072711</a> : cellular response to hydroxyurea<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0072719>GO:0072719</a> : cellular response to cisplatin<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0072757>GO:0072757</a> : cellular response to camptothecin<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1904631>GO:1904631</a> : response to glucoside<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1990414>GO:1990414</a> : replication-born double-strand break repair via sister chromatid exchange<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1990426>GO:1990426</a> : mitotic recombination-dependent replication fork processing<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1990918>GO:1990918</a> : double-strand break repair involved in meiotic recombination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:2000001>GO:2000001</a> : regulation of DNA damage checkpoint
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000150>GO:0000150</a> : DNA strand exchange activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003677>GO:0003677</a> : DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003682>GO:0003682</a> : chromatin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003690>GO:0003690</a> : double-stranded DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003697>GO:0003697</a> : single-stranded DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005515>GO:0005515</a> : protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005524>GO:0005524</a> : ATP binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008094>GO:0008094</a> : ATP-dependent activity, acting on DNA<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016887>GO:0016887</a> : ATP hydrolysis activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0017116>GO:0017116</a> : single-stranded DNA helicase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0019899>GO:0019899</a> : enzyme binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042802>GO:0042802</a> : identical protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070182>GO:0070182</a> : DNA polymerase binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0140664>GO:0140664</a> : ATP-dependent DNA damage sensor activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000794>GO:0000794</a> : condensed nuclear chromosome<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035861>GO:0035861</a> : site of double-strand break<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0099182>GO:0099182</a> : presynaptic intermediate filament cytoskeleton<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000228>GO:0000228</a> : nuclear chromosome<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000781>GO:0000781</a> : chromosome, telomeric region<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000785>GO:0000785</a> : chromatin<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000793>GO:0000793</a> : condensed chromosome<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000800>GO:0000800</a> : lateral element<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001673>GO:0001673</a> : male germ cell nucleus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005634>GO:0005634</a> : nucleus
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            arabidopsis_thaliana
+                        </div></td>
+                        
+                        <td>
+                            PHYB
+                        </td>
+
+                        <td>
+                            plants
+                        </td>
+
+                        <td>
+                            phytochrome B
+                        </td>
+
+                        <td><a href = https://plants.ensembl.org/Arabidopsis_thaliana/Gene/Summary?db=core;g=AT2G18790>
+                            AT2G18790
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/816394" target="_blank">816394</a>                            
+                        </td>
+
+                        <td><a href = https://plants.ensembl.org/Arabidopsis_thaliana/Location/View?db=core;g=AT2G18790>
+                            View PHYB in Ensembl genome browser
+                        </a>
+                            Not on UCSC
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://plants.ensembl.org/Arabidopsis_thaliana/Transcript/Summary?db=core;g=arabidopsis_thaliana;t=AT2G18790.2>AT2G18790.2</a><br>
+					<a href = https://plants.ensembl.org/Arabidopsis_thaliana/Transcript/Summary?db=core;g=arabidopsis_thaliana;t=AT2G18790.1>AT2G18790.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001335612.1" target="_blank">NM_001335612.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_127435.4" target="_blank">NM_127435.4</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Phytochrome B
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://plants.ensembl.org/Arabidopsis_thaliana/Transcript/ProteinSummary?db=core;g=arabidopsis_thaliana;t=AT2G18790.2>AT2G18790.2</a><br>
+					<a href = https://plants.ensembl.org/Arabidopsis_thaliana/Transcript/ProteinSummary?db=core;g=arabidopsis_thaliana;t=AT2G18790.1>AT2G18790.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001325249.1" target="_blank">NP_001325249.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_179469.1" target="_blank">NP_179469.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/P14713" target="_blank">P14713</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.rcsb.org/structure/4OUR" target="_blank">4OUR</a><br>
+					<a href="https://www.rcsb.org/structure/7RZW" target="_blank">7RZW</a><br>
+					<a href="https://www.rcsb.org/structure/8YB4" target="_blank">8YB4</a><br>
+					<a href="https://www.rcsb.org/structure/9IUZ" target="_blank">9IUZ</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006325>GO:0006325</a> : chromatin organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009409>GO:0009409</a> : response to cold<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009630>GO:0009630</a> : gravitropism<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009638>GO:0009638</a> : phototropism<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009640>GO:0009640</a> : photomorphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009649>GO:0009649</a> : entrainment of circadian clock<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009687>GO:0009687</a> : abscisic acid metabolic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009867>GO:0009867</a> : jasmonic acid mediated signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010029>GO:0010029</a> : regulation of seed germination<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010148>GO:0010148</a> : transpiration<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010161>GO:0010161</a> : red light signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010202>GO:0010202</a> : response to low fluence red light stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010218>GO:0010218</a> : response to far red light<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010374>GO:0010374</a> : stomatal complex development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010617>GO:0010617</a> : circadian regulation of calcium ion oscillation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0015979>GO:0015979</a> : photosynthesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031347>GO:0031347</a> : regulation of defense response<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:2000028>GO:2000028</a> : regulation of photoperiodism, flowering<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000160>GO:0000160</a> : phosphorelay signal transduction system<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006355>GO:0006355</a> : regulation of DNA-templated transcription<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009266>GO:0009266</a> : response to temperature stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009416>GO:0009416</a> : response to light stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009584>GO:0009584</a> : detection of visible light<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009585>GO:0009585</a> : red, far-red light phototransduction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010017>GO:0010017</a> : red or far-red light signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010018>GO:0010018</a> : far-red light signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010244>GO:0010244</a> : response to low fluence blue light stimulus by blue low-fluence system<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0017012>GO:0017012</a> : protein-phytochromobilin linkage<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045892>GO:0045892</a> : negative regulation of DNA-templated transcription
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000155>GO:0000155</a> : phosphorelay sensor kinase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003677>GO:0003677</a> : DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005515>GO:0005515</a> : protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009881>GO:0009881</a> : photoreceptor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009883>GO:0009883</a> : red or far-red light photoreceptor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031516>GO:0031516</a> : far-red light photoreceptor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031517>GO:0031517</a> : red light photoreceptor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042802>GO:0042802</a> : identical protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042803>GO:0042803</a> : protein homodimerization activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043565>GO:0043565</a> : sequence-specific DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1990841>GO:1990841</a> : promoter-specific chromatin binding
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005634>GO:0005634</a> : nucleus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005654>GO:0005654</a> : nucleoplasm<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005737>GO:0005737</a> : cytoplasm<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005829>GO:0005829</a> : cytosol<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016604>GO:0016604</a> : nuclear body<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016607>GO:0016607</a> : nuclear speck<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043231>GO:0043231</a> : intracellular membrane-bounded organelle
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            saccharomyces_cerevisiae
+                        </div></td>
+                        
+                        <td>
+                            SFA1
+                        </td>
+
+                        <td>
+                            fungi
+                        </td>
+
+                        <td>
+                            bifunctional alcohol dehydrogenase/S-(hydroxymethyl)glutathione dehydrogenase
+                        </td>
+
+                        <td><a href = https://fungi.ensembl.org/Saccharomyces_cerevisiae/Gene/Summary?db=core;g=YDL168W>
+                            YDL168W
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/851386" target="_blank">851386</a>                            
+                        </td>
+
+                        <td><a href = https://fungi.ensembl.org/Saccharomyces_cerevisiae/Location/View?db=core;g=YDL168W>
+                            View SFA1 in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=sacCer3&position=SFA1">View SFA1 in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://fungi.ensembl.org/Saccharomyces_cerevisiae/Transcript/Summary?db=core;g=saccharomyces_cerevisiae;t=YDL168W_mRNA>YDL168W_mRNA</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001180228.1" target="_blank">NM_001180228.1</a>                            
+                        </div></td>
+                        
+                        <td>
+                            S-(hydroxymethyl)glutathione dehydrogenase
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://fungi.ensembl.org/Saccharomyces_cerevisiae/Transcript/ProteinSummary?db=core;g=saccharomyces_cerevisiae;t=YDL168W_mRNA>YDL168W</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_010113.1" target="_blank">NP_010113.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/P32771" target="_blank">P32771</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000947>GO:0000947</a> : amino acid catabolic process to alcohol via Ehrlich pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0033859>GO:0033859</a> : furaldehyde metabolic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0044281>GO:0044281</a> : small molecule metabolic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046294>GO:0046294</a> : formaldehyde catabolic process
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0004022>GO:0004022</a> : alcohol dehydrogenase (NAD+) activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008270>GO:0008270</a> : zinc ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016491>GO:0016491</a> : oxidoreductase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0033833>GO:0033833</a> : hydroxymethylfurfural reductase (NADH) activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046872>GO:0046872</a> : metal ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0051903>GO:0051903</a> : S-(hydroxymethyl)glutathione dehydrogenase [NAD(P)+] activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0080007>GO:0080007</a> : S-nitrosoglutathione reductase (NADH) activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0106321>GO:0106321</a> : S-(hydroxymethyl)glutathione dehydrogenase (NADP+) activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0106322>GO:0106322</a> : S-(hydroxymethyl)glutathione dehydrogenase (NAD+) activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005829>GO:0005829</a> : cytosol<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005737>GO:0005737</a> : cytoplasm<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005739>GO:0005739</a> : mitochondrion
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            Leishmania_major
+                        </div></td>
+                        
+                        <td>
+                            ACP
+                        </td>
+
+                        <td>
+                            protists
+                        </td>
+
+                        <td>
+                            putative acyl carrier protein
+                        </td>
+
+                        <td><a href = https://protists.ensembl.org/Leishmania_major/Gene/Summary?db=core;g=LMJF_27_0290>
+                            LMJF_27_0290
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/12982621" target="_blank">12982621</a>                            
+                        </td>
+
+                        <td><a href = https://protists.ensembl.org/Leishmania_major/Location/View?db=core;g=LMJF_27_0290>
+                            View ACP in Ensembl genome browser
+                        </a>
+                            Not on UCSC
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://protists.ensembl.org/Leishmania_major/Transcript/Summary?db=core;g=Leishmania_major;t=CBZ12089>CBZ12089</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_003721787.1" target="_blank">XM_003721787.1</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Acyl carrier protein
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://protists.ensembl.org/Leishmania_major/Transcript/ProteinSummary?db=core;g=Leishmania_major;t=CBZ12089>CBZ12089</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_003721835.1" target="_blank">XP_003721835.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/E9AD06" target="_blank">E9AD06</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.rcsb.org/structure/2M5R" target="_blank">2M5R</a><br>
+					<a href="https://www.rcsb.org/structure/5ZWS" target="_blank">5ZWS</a><br>
+					<a href="https://www.rcsb.org/structure/5ZWT" target="_blank">5ZWT</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006633>GO:0006633</a> : fatty acid biosynthetic process
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000035>GO:0000035</a> : acyl binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000036>GO:0000036</a> : acyl carrier activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005739>GO:0005739</a> : mitochondrion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005759>GO:0005759</a> : mitochondrial matrix
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            escherichia_coli_gca_006381815
+                        </div></td>
+                        
+                        <td>
+                            HYBE
+                        </td>
+
+                        <td>
+                            bacteria
+                        </td>
+
+                        <td>
+                            hydrogenase 2-specific chaperone
+                        </td>
+
+                        <td><a href = https://bacteria.ensembl.org/Escherichia_coli_gca_006381815/Gene/Summary?db=core;g=ENSB:fqjn3NbmMv9mSox>
+                            ENSB:fqjn3NbmMv9mSox
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/947483" target="_blank">947483</a>                            
+                        </td>
+
+                        <td><a href = https://bacteria.ensembl.org/Escherichia_coli_gca_006381815/Location/View?db=core;g=ENSB:fqjn3NbmMv9mSox>
+                            View HYBE in Ensembl genome browser
+                        </a>
+                            Not on UCSC
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://bacteria.ensembl.org/Escherichia_coli_gca_006381815/Transcript/Summary?db=core;g=escherichia_coli_gca_006381815;t=ENSB:fqjn3NbmMv9mSox>ENSB:fqjn3NbmMv9mSox</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            Data not found                            
+                        </div></td>
+                        
+                        <td>
+                            Hydrogenase-2 operon protein HybE
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://bacteria.ensembl.org/Escherichia_coli_gca_006381815/Transcript/ProteinSummary_ENSB:fqjn3NbmMv9mSox?db=core;g=escherichia_coli_gca_006381815;t=ENSB:fqjn3NbmMv9mSox>ENSB:fqjn3NbmMv9mSox</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_417466.1" target="_blank">NP_417466.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_311904.1" target="_blank">NP_311904.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/Q8XBW0" target="_blank">Q8XBW0</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<p>Data not found</p>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<p>Data not found</p>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<p>Data not found</p>
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            mus_musculus
+                        </div></td>
+                        
+                        <td>
+                            DMD
+                        </td>
+
+                        <td>
+                            vertebrates
+                        </td>
+
+                        <td>
+                            dystrophin, muscular dystrophy
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Mus_musculus/Gene/Summary?db=core;g=ENSMUSG00000045103>
+                            ENSMUSG00000045103
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/13405" target="_blank">13405</a>                            
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Mus_musculus/Location/View?db=core;g=ENSMUSG00000045103>
+                            View DMD in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm9&position=DMD">View DMD in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000127295(Not translated)>ENSMUST00000127295(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000114000>ENSMUST00000114000</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000147740(Not translated)>ENSMUST00000147740(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000239269>ENSMUST00000239269</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000141261(Not translated)>ENSMUST00000141261(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000139998(Not translated)>ENSMUST00000139998(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000146331(Not translated)>ENSMUST00000146331(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000156107(Not translated)>ENSMUST00000156107(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000128983(Not translated)>ENSMUST00000128983(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000132333(Not translated)>ENSMUST00000132333(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000239019>ENSMUST00000239019</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000149433(Not translated)>ENSMUST00000149433(Not translated)</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000113992>ENSMUST00000113992</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000113991>ENSMUST00000113991</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/Summary?db=core;g=mus_musculus;t=ENSMUST00000123308(Not translated)>ENSMUST00000123308(Not translated)</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006527773.3" target="_blank">XM_006527773.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_036161806.1" target="_blank">XM_036161806.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_030251215.2" target="_blank">XM_030251215.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318379.3" target="_blank">XM_017318379.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318378.2" target="_blank">XM_017318378.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318377.2" target="_blank">XM_017318377.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318376.2" target="_blank">XM_017318376.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_036161805.1" target="_blank">XM_036161805.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318375.2" target="_blank">XM_017318375.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318374.2" target="_blank">XM_017318374.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_017318373.2" target="_blank">XM_017318373.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006527768.4" target="_blank">XM_006527768.4</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006527767.4" target="_blank">XM_006527767.4</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001314038.1" target="_blank">NM_001314038.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001314037.1" target="_blank">NM_001314037.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001314036.1" target="_blank">NM_001314036.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001314035.1" target="_blank">NM_001314035.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_001314034.1" target="_blank">NM_001314034.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_007868.6" target="_blank">NM_007868.6</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Dystrophin
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Mus_musculus/Transcript/ProteinSummary?db=core;g=mus_musculus;t=ENSMUST00000127295(Not translated)>ENSMUSP00000109633</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/ProteinSummary?db=core;g=mus_musculus;t=ENSMUST00000114000>ENSMUSP00000159246</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/ProteinSummary?db=core;g=mus_musculus;t=ENSMUST00000147740(Not translated)>ENSMUSP00000158938</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/ProteinSummary?db=core;g=mus_musculus;t=ENSMUST00000239269>ENSMUSP00000109625</a><br>
+					<a href = https://www.ensembl.org/Mus_musculus/Transcript/ProteinSummary?db=core;g=mus_musculus;t=ENSMUST00000141261(Not translated)>ENSMUSP00000109624</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a><br>
+					<a>Not translated</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_036017699.1" target="_blank">XP_036017699.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_036017698.1" target="_blank">XP_036017698.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_030107075.1" target="_blank">XP_030107075.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173868.1" target="_blank">XP_017173868.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173867.1" target="_blank">XP_017173867.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173866.1" target="_blank">XP_017173866.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173865.1" target="_blank">XP_017173865.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173864.1" target="_blank">XP_017173864.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173863.1" target="_blank">XP_017173863.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_017173862.1" target="_blank">XP_017173862.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001300967.1" target="_blank">NP_001300967.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001300966.1" target="_blank">NP_001300966.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001300965.1" target="_blank">NP_001300965.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001300964.1" target="_blank">NP_001300964.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_001300963.1" target="_blank">NP_001300963.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006527836.1" target="_blank">XP_006527836.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006527831.1" target="_blank">XP_006527831.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006527830.1" target="_blank">XP_006527830.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_031894.1" target="_blank">NP_031894.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/P11531" target="_blank">P11531</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006355>GO:0006355</a> : regulation of DNA-templated transcription<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006915>GO:0006915</a> : apoptotic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006941>GO:0006941</a> : striated muscle contraction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006954>GO:0006954</a> : inflammatory response<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007517>GO:0007517</a> : muscle organ development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007519>GO:0007519</a> : skeletal muscle tissue development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008065>GO:0008065</a> : establishment of blood-nerve barrier<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008340>GO:0008340</a> : determination of adult lifespan<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009410>GO:0009410</a> : response to xenobiotic stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010467>GO:0010467</a> : gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010468>GO:0010468</a> : regulation of gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014904>GO:0014904</a> : myotube cell development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0021629>GO:0021629</a> : olfactory nerve structural organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035264>GO:0035264</a> : multicellular organism growth<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035994>GO:0035994</a> : response to muscle stretch<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042391>GO:0042391</a> : regulation of membrane potential<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043403>GO:0043403</a> : skeletal muscle tissue regeneration<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046716>GO:0046716</a> : muscle cell cellular homeostasis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0051647>GO:0051647</a> : nucleus localization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0055001>GO:0055001</a> : muscle cell development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0055002>GO:0055002</a> : striated muscle cell development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060173>GO:0060173</a> : limb development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060348>GO:0060348</a> : bone development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060857>GO:0060857</a> : establishment of glial blood-brain barrier<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0061448>GO:0061448</a> : connective tissue development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070373>GO:0070373</a> : negative regulation of ERK1 and ERK2 cascade<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0090659>GO:0090659</a> : walking behavior<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1903409>GO:1903409</a> : reactive oxygen species biosynthetic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007271>GO:0007271</a> : synaptic transmission, cholinergic<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001954>GO:0001954</a> : positive regulation of cell-matrix adhesion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0002027>GO:0002027</a> : regulation of heart rate<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008104>GO:0008104</a> : protein localization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008284>GO:0008284</a> : positive regulation of cell population proliferation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010880>GO:0010880</a> : regulation of release of sequestered calcium ion into cytosol by sarcoplasmic reticulum<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010881>GO:0010881</a> : regulation of cardiac muscle contraction by regulation of the release of sequestered calcium ion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010976>GO:0010976</a> : positive regulation of neuron projection development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014809>GO:0014809</a> : regulation of skeletal muscle contraction by regulation of release of sequestered calcium ion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014819>GO:0014819</a> : regulation of skeletal muscle contraction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014894>GO:0014894</a> : response to denervation involved in regulation of muscle adaptation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0021987>GO:0021987</a> : cerebral cortex development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030154>GO:0030154</a> : cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030182>GO:0030182</a> : neuron differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042692>GO:0042692</a> : muscle cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045665>GO:0045665</a> : negative regulation of neuron differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045666>GO:0045666</a> : positive regulation of neuron differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048812>GO:0048812</a> : neuron projection morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0065003>GO:0065003</a> : protein-containing complex assembly<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0086001>GO:0086001</a> : cardiac muscle cell action potential<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0090287>GO:0090287</a> : regulation of cellular response to growth factor stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1901385>GO:1901385</a> : regulation of voltage-gated calcium channel activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:2000651>GO:2000651</a> : positive regulation of sodium ion transmembrane transporter activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003779>GO:0003779</a> : actin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005178>GO:0005178</a> : integrin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005515>GO:0005515</a> : protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005521>GO:0005521</a> : lamin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008270>GO:0008270</a> : zinc ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030165>GO:0030165</a> : PDZ domain binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0044877>GO:0044877</a> : protein-containing complex binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0050998>GO:0050998</a> : nitric-oxide synthase binding
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0098794>GO:0098794</a> : postsynapse<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0098982>GO:0098982</a> : GABA-ergic synapse<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0099572>GO:0099572</a> : postsynaptic specialization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005634>GO:0005634</a> : nucleus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005737>GO:0005737</a> : cytoplasm<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005741>GO:0005741</a> : mitochondrial outer membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005840>GO:0005840</a> : ribosome<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005856>GO:0005856</a> : cytoskeleton<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005883>GO:0005883</a> : neurofilament<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005886>GO:0005886</a> : plasma membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0014069>GO:0014069</a> : postsynaptic density<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030016>GO:0030016</a> : myofibril<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030018>GO:0030018</a> : Z disc<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030027>GO:0030027</a> : lamellipodium<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030054>GO:0030054</a> : cell junction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030055>GO:0030055</a> : cell-substrate junction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030141>GO:0030141</a> : secretory granule<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030424>GO:0030424</a> : axon<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030672>GO:0030672</a> : synaptic vesicle membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042383>GO:0042383</a> : sarcolemma<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042995>GO:0042995</a> : cell projection<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043025>GO:0043025</a> : neuronal cell body<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043232>GO:0043232</a> : intracellular membraneless organelle<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0044306>GO:0044306</a> : neuron projection terminus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045121>GO:0045121</a> : membrane raft<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045202>GO:0045202</a> : synapse<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045211>GO:0045211</a> : postsynaptic membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048471>GO:0048471</a> : perinuclear region of cytoplasm<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0097449>GO:0097449</a> : astrocyte projection<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0099617>GO:0099617</a> : matrix side of mitochondrial inner membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0120025>GO:0120025</a> : plasma membrane bounded cell projection<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016010>GO:0016010</a> : dystrophin-associated glycoprotein complex<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0032991>GO:0032991</a> : protein-containing complex
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            Drosophila_melanogaster
+                        </div></td>
+                        
+                        <td>
+                            DPP
+                        </td>
+
+                        <td>
+                            metazoa
+                        </td>
+
+                        <td>
+                            decapentaplegic
+                        </td>
+
+                        <td><a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Gene/Summary?db=core;g=FBgn0000490>
+                            FBgn0000490
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/33432" target="_blank">33432</a>                            
+                        </td>
+
+                        <td><a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Location/View?db=core;g=FBgn0000490>
+                            View DPP in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=dm6&position=DPP">View DPP in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/Summary?db=core;g=Drosophila_melanogaster;t=FBtr0077775>FBtr0077775</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/Summary?db=core;g=Drosophila_melanogaster;t=FBtr0077773>FBtr0077773</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/Summary?db=core;g=Drosophila_melanogaster;t=FBtr0077771>FBtr0077771</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/Summary?db=core;g=Drosophila_melanogaster;t=FBtr0077772>FBtr0077772</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_057963.5" target="_blank">NM_057963.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_164488.2" target="_blank">NM_164488.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_164486.2" target="_blank">NM_164486.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_164485.2" target="_blank">NM_164485.2</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_169217.3" target="_blank">NM_169217.3</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_169218.3" target="_blank">NM_169218.3</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Protein decapentaplegic
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/ProteinSummary?db=core;g=Drosophila_melanogaster;t=FBtr0077775>FBpp0077455</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/ProteinSummary?db=core;g=Drosophila_melanogaster;t=FBtr0077773>FBpp0077453</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/ProteinSummary?db=core;g=Drosophila_melanogaster;t=FBtr0077771>FBpp0077451</a><br>
+					<a href = https://metazoa.ensembl.org/Drosophila_melanogaster/Transcript/ProteinSummary?db=core;g=Drosophila_melanogaster;t=FBtr0077772>FBpp0077452</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_722813.1" target="_blank">NP_722813.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_722811.1" target="_blank">NP_722811.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_722810.1" target="_blank">NP_722810.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_477311.1" target="_blank">NP_477311.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_731238.1" target="_blank">NP_731238.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_731237.1" target="_blank">NP_731237.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/P91706" target="_blank">P91706</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046529>GO:0046529</a> : imaginal disc fusion, thorax closure<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001715>GO:0001715</a> : ectodermal cell fate specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001745>GO:0001745</a> : compound eye morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007281>GO:0007281</a> : germ cell development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007304>GO:0007304</a> : chorion-containing eggshell formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007313>GO:0007313</a> : maternal specification of dorsal/ventral axis, oocyte, soma encoded<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007352>GO:0007352</a> : zygotic specification of dorsal/ventral axis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007378>GO:0007378</a> : amnioserosa formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007391>GO:0007391</a> : dorsal closure<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007427>GO:0007427</a> : epithelial cell migration, open tracheal system<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007442>GO:0007442</a> : hindgut morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007443>GO:0007443</a> : Malpighian tubule morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007444>GO:0007444</a> : imaginal disc development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007455>GO:0007455</a> : eye-antennal disc morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007458>GO:0007458</a> : progression of morphogenetic furrow involved in compound eye morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007474>GO:0007474</a> : imaginal disc-derived wing vein specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007476>GO:0007476</a> : imaginal disc-derived wing morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007498>GO:0007498</a> : mesoderm development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007507>GO:0007507</a> : heart development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007516>GO:0007516</a> : hemocyte development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008354>GO:0008354</a> : germ cell migration<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008360>GO:0008360</a> : regulation of cell shape<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008586>GO:0008586</a> : imaginal disc-derived wing vein morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009950>GO:0009950</a> : dorsal/ventral axis specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009953>GO:0009953</a> : dorsal/ventral pattern formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010002>GO:0010002</a> : cardioblast differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010628>GO:0010628</a> : positive regulation of gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010629>GO:0010629</a> : negative regulation of gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030154>GO:0030154</a> : cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030509>GO:0030509</a> : BMP signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030707>GO:0030707</a> : follicle cell of egg chamber development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030718>GO:0030718</a> : germ-line stem cell population maintenance<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030721>GO:0030721</a> : spectrosome organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035156>GO:0035156</a> : fusion cell fate specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035158>GO:0035158</a> : regulation of tube diameter, open tracheal system<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035168>GO:0035168</a> : larval lymph gland hemocyte differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035214>GO:0035214</a> : eye-antennal disc development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035215>GO:0035215</a> : genital disc development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035217>GO:0035217</a> : labial disc development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035222>GO:0035222</a> : wing disc pattern formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035224>GO:0035224</a> : genital disc anterior/posterior pattern formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035263>GO:0035263</a> : genital disc sexually dimorphic development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035309>GO:0035309</a> : wing and notum subfield formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0036098>GO:0036098</a> : male germ-line stem cell population maintenance<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0036099>GO:0036099</a> : female germ-line stem cell population maintenance<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0036335>GO:0036335</a> : intestinal stem cell homeostasis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042078>GO:0042078</a> : germ-line stem cell division<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045464>GO:0045464</a> : R8 cell fate specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045570>GO:0045570</a> : regulation of imaginal disc growth<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045572>GO:0045572</a> : positive regulation of imaginal disc growth<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045595>GO:0045595</a> : regulation of cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045705>GO:0045705</a> : negative regulation of salivary gland boundary specification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046843>GO:0046843</a> : dorsal appendage formation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048542>GO:0048542</a> : lymph gland development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048619>GO:0048619</a> : embryonic hindgut morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048636>GO:0048636</a> : positive regulation of muscle organ development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060323>GO:0060323</a> : head morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060391>GO:0060391</a> : positive regulation of SMAD protein signal transduction<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0061320>GO:0061320</a> : pericardial nephrocyte differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0061327>GO:0061327</a> : anterior Malpighian tubule development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0061352>GO:0061352</a> : cell chemotaxis involved in Malpighian tubule morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:2000736>GO:2000736</a> : regulation of stem cell differentiation
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005125>GO:0005125</a> : cytokine activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005515>GO:0005515</a> : protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005518>GO:0005518</a> : collagen binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008083>GO:0008083</a> : growth factor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008201>GO:0008201</a> : heparin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016015>GO:0016015</a> : morphogen activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042803>GO:0042803</a> : protein homodimerization activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043539>GO:0043539</a> : protein serine/threonine kinase activator activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046982>GO:0046982</a> : protein heterodimerization activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048018>GO:0048018</a> : receptor ligand activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070700>GO:0070700</a> : BMP receptor binding
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035230>GO:0035230</a> : cytoneme<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005615>GO:0005615</a> : extracellular space<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005576>GO:0005576</a> : extracellular region<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031252>GO:0031252</a> : cell leading edge<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0098898>GO:0098898</a> : dense core granule lumen
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            gallus_gallus
+                        </div></td>
+                        
+                        <td>
+                            TGFBR2
+                        </td>
+
+                        <td>
+                            vertebrates
+                        </td>
+
+                        <td>
+                            transforming growth factor beta receptor 2
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Gallus_gallus/Gene/Summary?db=core;g=ENSGALG00010002281>
+                            ENSGALG00010002281
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/396399" target="_blank">396399</a>                            
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Gallus_gallus/Location/View?db=core;g=ENSGALG00010002281>
+                            View TGFBR2 in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=galGal6&position=TGFBR2">View TGFBR2 in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005172>ENSGALT00010005172</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005175>ENSGALT00010005175</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005177>ENSGALT00010005177</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005180>ENSGALT00010005180</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005181>ENSGALT00010005181</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/Summary?db=core;g=gallus_gallus;t=ENSGALT00010005185>ENSGALT00010005185</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_046910484.1" target="_blank">XM_046910484.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_015281321.4" target="_blank">XM_015281321.4</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_205428.2" target="_blank">NM_205428.2</a>                            
+                        </div></td>
+                        
+                        <td>
+                            TGF-beta receptor type-2
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005172>ENSGALP00010003044</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005175>ENSGALP00010003047</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005177>ENSGALP00010003049</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005180>ENSGALP00010003052</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005181>ENSGALP00010003053</a><br>
+					<a href = https://www.ensembl.org/Gallus_gallus/Transcript/ProteinSummary?db=core;g=gallus_gallus;t=ENSGALT00010005185>ENSGALP00010003057</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_046766440.1" target="_blank">XP_046766440.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_015136807.1" target="_blank">XP_015136807.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_990759.1" target="_blank">NP_990759.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/Q90999" target="_blank">Q90999</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.rcsb.org/structure/1KS6" target="_blank">1KS6</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007162>GO:0007162</a> : negative regulation of cell adhesion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010468>GO:0010468</a> : regulation of gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0022408>GO:0022408</a> : negative regulation of cell-cell adhesion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001654>GO:0001654</a> : eye development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001666>GO:0001666</a> : response to hypoxia<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001775>GO:0001775</a> : cell activation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006468>GO:0006468</a> : protein phosphorylation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006915>GO:0006915</a> : apoptotic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007178>GO:0007178</a> : cell surface receptor protein serine/threonine kinase signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007179>GO:0007179</a> : transforming growth factor beta receptor signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007399>GO:0007399</a> : nervous system development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007507>GO:0007507</a> : heart development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009410>GO:0009410</a> : response to xenobiotic stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009653>GO:0009653</a> : anatomical structure morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009888>GO:0009888</a> : tissue development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010628>GO:0010628</a> : positive regulation of gene expression<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010718>GO:0010718</a> : positive regulation of epithelial to mesenchymal transition<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010936>GO:0010936</a> : negative regulation of macrophage cytokine production<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016477>GO:0016477</a> : cell migration<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030154>GO:0030154</a> : cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030324>GO:0030324</a> : lung development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030335>GO:0030335</a> : positive regulation of cell migration<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030509>GO:0030509</a> : BMP signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0032570>GO:0032570</a> : response to progesterone<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0032924>GO:0032924</a> : activin receptor signaling pathway<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045216>GO:0045216</a> : cell-cell junction organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048568>GO:0048568</a> : embryonic organ development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048762>GO:0048762</a> : mesenchymal cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0050714>GO:0050714</a> : positive regulation of protein secretion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0051496>GO:0051496</a> : positive regulation of stress fiber assembly<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060317>GO:0060317</a> : cardiac epithelial to mesenchymal transition<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060325>GO:0060325</a> : face morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070483>GO:0070483</a> : detection of hypoxia<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070723>GO:0070723</a> : response to cholesterol<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0071363>GO:0071363</a> : cellular response to growth factor stimulus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:1905075>GO:1905075</a> : positive regulation of tight junction disassembly<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:2000379>GO:2000379</a> : positive regulation of reactive oxygen species metabolic process
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0034713>GO:0034713</a> : type I transforming growth factor beta receptor binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0004674>GO:0004674</a> : protein serine/threonine kinase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0004675>GO:0004675</a> : transmembrane receptor protein serine/threonine kinase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005024>GO:0005024</a> : transforming growth factor beta receptor activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005025>GO:0005025</a> : transforming growth factor beta receptor activity, type I<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005026>GO:0005026</a> : transforming growth factor beta receptor activity, type II<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005515>GO:0005515</a> : protein binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005524>GO:0005524</a> : ATP binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005539>GO:0005539</a> : glycosaminoglycan binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016361>GO:0016361</a> : activin receptor activity, type I<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016362>GO:0016362</a> : activin receptor activity, type II<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0034714>GO:0034714</a> : type III transforming growth factor beta receptor binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046872>GO:0046872</a> : metal ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048185>GO:0048185</a> : activin binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0050431>GO:0050431</a> : transforming growth factor beta binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070123>GO:0070123</a> : transforming growth factor beta receptor activity, type III<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0098821>GO:0098821</a> : BMP receptor activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005886>GO:0005886</a> : plasma membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005901>GO:0005901</a> : caveola<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0009897>GO:0009897</a> : external side of plasma membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0016020>GO:0016020</a> : membrane<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0031012>GO:0031012</a> : extracellular matrix<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045121>GO:0045121</a> : membrane raft<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043235>GO:0043235</a> : receptor complex<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048179>GO:0048179</a> : activin receptor complex
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            rattus_norvegicus
+                        </div></td>
+                        
+                        <td>
+                            APP
+                        </td>
+
+                        <td>
+                            vertebrates
+                        </td>
+
+                        <td>
+                            amyloid beta precursor protein
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Rattus_norvegicus/Gene/Summary?db=core;g=ENSRNOG00000006997>
+                            ENSRNOG00000006997
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/54226" target="_blank">54226</a>                            
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Rattus_norvegicus/Location/View?db=core;g=ENSRNOG00000006997>
+                            View APP in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=rn7&position=APP">View APP in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/Summary?db=core;g=rattus_norvegicus;t=ENSRNOT00000048854>ENSRNOT00000048854</a><br>
+					<a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/Summary?db=core;g=rattus_norvegicus;t=ENSRNOT00000044081>ENSRNOT00000044081</a><br>
+					<a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/Summary?db=core;g=rattus_norvegicus;t=ENSRNOT00000104573>ENSRNOT00000104573</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_063270722.1" target="_blank">XM_063270722.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006248012.5" target="_blank">XM_006248012.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006248011.5" target="_blank">XM_006248011.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006248010.5" target="_blank">XM_006248010.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006248009.5" target="_blank">XM_006248009.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_006248008.5" target="_blank">XM_006248008.5</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/NM_019288.2" target="_blank">NM_019288.2</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Amyloid-beta precursor protein
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/ProteinSummary?db=core;g=rattus_norvegicus;t=ENSRNOT00000048854>ENSRNOP00000041613</a><br>
+					<a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/ProteinSummary?db=core;g=rattus_norvegicus;t=ENSRNOT00000044081>ENSRNOP00000040243</a><br>
+					<a href = https://www.ensembl.org/Rattus_norvegicus/Transcript/ProteinSummary?db=core;g=rattus_norvegicus;t=ENSRNOT00000104573>ENSRNOP00000078198</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_063126792.1" target="_blank">XP_063126792.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006248074.1" target="_blank">XP_006248074.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006248073.1" target="_blank">XP_006248073.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006248072.1" target="_blank">XP_006248072.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006248071.1" target="_blank">XP_006248071.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_006248070.1" target="_blank">XP_006248070.1</a><br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/NP_062161.1" target="_blank">NP_062161.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/P08592" target="_blank">P08592</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.rcsb.org/structure/1M7E" target="_blank">1M7E</a><br>
+					<a href="https://www.rcsb.org/structure/1NMJ" target="_blank">1NMJ</a><br>
+					<a href="https://www.rcsb.org/structure/1OQN" target="_blank">1OQN</a><br>
+					<a href="https://www.rcsb.org/structure/2LI9" target="_blank">2LI9</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006508>GO:0006508</a> : proteolysis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0010815>GO:0010815</a> : bradykinin catabolic process<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043069>GO:0043069</a> : negative regulation of programmed cell death
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0004177>GO:0004177</a> : aminopeptidase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0008237>GO:0008237</a> : metallopeptidase activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030145>GO:0030145</a> : manganese ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0042803>GO:0042803</a> : protein homodimerization activity<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046872>GO:0046872</a> : metal ion binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0070006>GO:0070006</a> : metalloaminopeptidase activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005829>GO:0005829</a> : cytosol<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005737>GO:0005737</a> : cytoplasm
+                        </div></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><div class=header_1>
+                            Felis_catus
+                        </div></td>
+                        
+                        <td>
+                            MYF5
+                        </td>
+
+                        <td>
+                            vertebrates
+                        </td>
+
+                        <td>
+                            myogenic factor 5
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Felis_catus/Gene/Summary?db=core;g=ENSFCAG00000015011>
+                            ENSFCAG00000015011
+                        </a></td>
+
+                        <td>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/gene/101091030" target="_blank">101091030</a>                            
+                        </td>
+
+                        <td><a href = https://www.ensembl.org/Felis_catus/Location/View?db=core;g=ENSFCAG00000015011>
+                            View MYF5 in Ensembl genome browser
+                        </a>
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=felCat9&position=MYF5">View MYF5 in USCS genome browser</a>
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Felis_catus/Transcript/Summary?db=core;g=Felis_catus;t=ENSFCAT00000015015>ENSFCAT00000015015</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/nuccore/XM_003989076.4" target="_blank">XM_003989076.4</a>                            
+                        </div></td>
+                        
+                        <td>
+                            Myogenic factor
+                        </td>
+
+                        <td><div class='scroll'>
+                            <a href = https://www.ensembl.org/Felis_catus/Transcript/ProteinSummary?db=core;g=Felis_catus;t=ENSFCAT00000015015>ENSFCAP00000013924</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.ncbi.nlm.nih.gov/protein/XP_003989125.1" target="_blank">XP_003989125.1</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href="https://www.uniprot.org/uniprot/M3WLS2" target="_blank">M3WLS2</a>
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001502>GO:0001502</a> : cartilage condensation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001503>GO:0001503</a> : ossification<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001756>GO:0001756</a> : somitogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001952>GO:0001952</a> : regulation of cell-matrix adhesion<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006355>GO:0006355</a> : regulation of DNA-templated transcription<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0006357>GO:0006357</a> : regulation of transcription by RNA polymerase II<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007517>GO:0007517</a> : muscle organ development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0007519>GO:0007519</a> : skeletal muscle tissue development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030154>GO:0030154</a> : cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0030198>GO:0030198</a> : extracellular matrix organization<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0035914>GO:0035914</a> : skeletal muscle cell differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043010>GO:0043010</a> : camera-type eye development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045663>GO:0045663</a> : positive regulation of myoblast differentiation<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0045944>GO:0045944</a> : positive regulation of transcription by RNA polymerase II<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048644>GO:0048644</a> : muscle organ morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048704>GO:0048704</a> : embryonic skeletal system morphogenesis<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0048743>GO:0048743</a> : positive regulation of skeletal muscle fiber development<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0060415>GO:0060415</a> : muscle tissue morphogenesis
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000978>GO:0000978</a> : RNA polymerase II cis-regulatory region sequence-specific DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0000981>GO:0000981</a> : DNA-binding transcription factor activity, RNA polymerase II-specific<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0001228>GO:0001228</a> : DNA-binding transcription activator activity, RNA polymerase II-specific<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0003677>GO:0003677</a> : DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0043565>GO:0043565</a> : sequence-specific DNA binding<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0046983>GO:0046983</a> : protein dimerization activity
+                        </div></td>
+
+                        <td><div class='scroll'>
+                            <br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005634>GO:0005634</a> : nucleus<br>
+					<a href = https://amigo.geneontology.org/amigo/term/GO:0005654>GO:0005654</a> : nucleoplasm
+                        </div></td>
+                        
+                    </tr> 
+                </tbody>
+            </table>
+        </body>
+    </html>
+    

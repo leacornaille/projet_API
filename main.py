@@ -7,7 +7,14 @@ import uniprotKB
 import NCBI
 import ucsc
 
-def html_table(file, mail) :
+def html_table(file, mail, filename_output) :
+    """
+Point d'entrée principal du script.
+
+Premier argument : Nom du fichier contenant les gènes et les espèces (exemple : GeneSymbols_45.txt).
+Deuxième argument : Email pour faire les requêtes à l'API NCBI (exemple : exemple@mail.com).
+Troisième argument : Nom du fichier de sortie (exemple : Results.html).
+    """
     ## HTML Body
     body_html ="" # Initialisation du corps du HTML
 
@@ -40,8 +47,11 @@ def html_table(file, mail) :
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
 
-            link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}" # Raccourci
+            link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}"  # Raccourci
             
+            if embl_info['division'] == 'vertebrates':
+                link = f"https://www.ensembl.org/{embl_info['species'].capitalize()}"
+
         ## Liens Ensembl pour protéines et transcrits
             # Initialisation : Premiers lien Ensembl
             transcript = embl_info["transcript_id"][0]
@@ -111,37 +121,50 @@ def html_table(file, mail) :
                             {embl_info["gene_symbol"]}
                         </td>
 
-                        <td><a href = {embl_info["gene_browser"]}>
-                            View {embl_info["gene_symbol"]} in gene browser
-                        </a></td>
+                        <td>
+                            {embl_info['division']}
+                        </td>
+
+                        <td>
+                            {ncbi_info['Official name']}
+                        </td>
 
                         <td><a href = {link}/Gene/Summary?db=core;g={embl_info['gene_id']}>
                             {embl_info["gene_id"]}
                         </a></td>
+
+                        <td>
+                            {"".join(ncbi_info['Links gene'])}                            
+                        </td>
+
+                        <td><a href = {embl_info["gene_browser"]}>
+                            View {embl_info["gene_symbol"]} in Ensembl genome browser
+                        </a>
+                            {ucsc_link["lien_ucsc"]}
+                        </td>
 
                         <td><div class='scroll'>
                             {embl_transcript}
                         </div></td>
 
                         <td><div class='scroll'>
+                            {"".join(ncbi_info['Links RNA'])}                            
+                        </div></td>
+                        
+                        <td>
+                            {uniprot_info['protein_name']}
+                        </td>
+
+                        <td><div class='scroll'>
                             {embl_prot}
                         </div></td>
 
-                        <td><div class='scroll'>{"".join(ncbi_info['Links gene'])}                            
-                        </div></td>
-
-                        <td><div class='scroll'>{"".join(ncbi_info['Links RNA'])}                            
-                        </div></td>
-
-                        <td><div class='scroll'>{"".join(ncbi_info['Links prot'])}
+                        <td><div class='scroll'>
+                            {"".join(ncbi_info['Links prot'])}
                         </div></td>
 
                         <td><div class='scroll'>
                             {"".join(uniprot_info["uniprot_links"])}
-                        </div></td>
-
-                        <td><div class='scroll'>
-                            {uniprot_info['protein_name']}
                         </div></td>
 
                         <td><div class='scroll'>
@@ -159,10 +182,7 @@ def html_table(file, mail) :
                         <td><div class='scroll'>
                             {cc_link}
                         </div></td>
-
-                        <td><div class='scroll'>
-                            {ucsc_link["lien_ucsc"]}
-                        </div></td>
+                        
                     </tr>"""
 
     ## HTML Head
@@ -170,7 +190,7 @@ def html_table(file, mail) :
     <!DOCTYPE HTML>
     <html lang="fr-FR">
         <head>
-            <title> Projet API </title>
+            <title>Results : Gene Annotation Automatic Table</title>
             <meta http-equiv="Content-type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -197,7 +217,7 @@ def html_table(file, mail) :
             <!-- Script Supplémentaire-->
             <script type="text/javascript" class="init">
                 $(document).ready(function() {
-                    const table = $('#gene').DataTable({
+                    $('#gene').DataTable({
                         <!--Configure le placement des éléments autour du tableau-->
                         layout: { 
                             topStart : 'pageLength',
@@ -220,44 +240,76 @@ def html_table(file, mail) :
                             bottom1End : "search",
                         },
                         fixedHeader: true,
-                        "scrollY": true,
-                        "scrollX": true,
+                        scrollY: true,
+                        scrollX: true,
                         lengthMenu: [5, 10, 25, 50, 75, 100],
+                        fixedColumns: {
+                          leftColumns: 2
+                        },
                         colReorder: {
                             columns: ':gt(1)'
                         },                                       
                     });
                 });
-
-                .scroll {white-space:nowrap;
-                        max-height: 120px;
-                        max-width: 230px;
-                        overflow: auto;
-	            }
             </script>
-        </head>
-        <body>
-            <h1>Resultat du scripting d'aggrégation automatique des annotations</h1>
 
+            <style>
+
+            h1{
+                padding-top: 40px;
+                padding-bottom: 40px;
+                text-align: center;
+            }
+
+            .header{
+                background-color: #E8E8E8;
+                margin: 0 ;
+                height: 120px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            a{
+                color: black;
+            }
+            
+            .scroll {white-space:nowrap;
+                max-height: 120px;
+                max-width: 230px;
+                overflow: auto;
+	        }
+            
+            td{
+                text-align: justify;
+            }
+
+            </style>
+        </head>
+
+        <body>
+            <div class="header">
+            <h1>Gene Annotation Automatic Table</h1>
+            </div>
             <table id="gene" class="display nowrap cell-border" style="width:100%">
                 <thead>
                     <tr>
-                        <th><div class=header_1>Species</div></th>
+                        <th><div class=header_1>Organism</div></th>
                         <th>Gene Symbol</th>
-                        <th>Gene Browser</th>
-                        <th>Gene - EMBL ID</th>
-                        <th>Transcript - EMBL ID</th>
-                        <th>Protein - EMBL ID</th>
-                        <th>Gene - NCBI ID</th>
-                        <th>Transcript - NCBI ID</th>
-                        <th>Protein - NCBI ID</th>
-                        <th>Uniprot ID</th>
+                        <th>Division</th>
+                        <th>Official Full Name</th>
+                        <th>Gene Access Number</th>
+                        <th>Gene Access Number</th>
+                        <th>Genome Browser</th>
+                        <th>RNA Access Numbers</th>
+                        <th>RNA Access Numbers</th>
                         <th>Protein Name</th>
+                        <th>Protein Access Numbers</th>
+                        <th>Protein Access Numbers</th>
+                        <th>Protein Access Numbers</th>
                         <th>3D structure - PDB</th>
                         <th>Biological process - GO term</th>
                         <th>Molecular function - GO term</th>
                         <th>Cellular component - GO term</th>
-                        <th> Lien UCSC Genome Browser</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -271,11 +323,16 @@ def html_table(file, mail) :
     </html>
     """
 
-    html = open("Results.html","w")
+    html = open(filename_output,"w")
     html.write(head_html[1:]+body_html+tail_html)
     html.close()
 
 if __name__ == '__main__':
-    filename = sys.argv[1]
-    mail = sys.argv[2]
-    html_table(filename, mail)
+    args = sys.argv[1:]
+    if len(args) < 3:
+        print("Usage: python3 main.py <fichier_genes> <email> <nom_fichier_sortie>")
+        sys.exit(1)
+    filename = args[0]
+    mail = args[1]
+    filename_output = args[2]
+    html_table(filename, mail, filename_output)
