@@ -33,7 +33,7 @@ def html_table(file, mail) :
 
         # Appel des fonctions principales des sous-scripts
             embl_info = ensembl.InfoGene(species_info)
-            go_info = GO_term.main_GO(species_info)
+            go_info = GO_term.main_GO(species_info_ncbi_uniprot)
             uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
@@ -77,14 +77,20 @@ def html_table(file, mail) :
                 bp = go_info["GO"]["biological_process"]
                 cc = go_info["GO"]["cellular_component"]
 
+                # Initialisation des variables de liens
+                mf_link = ""
+                bp_link = ""
+                cc_link =""
+
+                # Création et concaténation des liens
                 for key, value in mf.items() :
-                    mf_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
+                    mf_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
                 for key, value in bp.items() :
-                    bp_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
+                    bp_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
                 for key, value in cc.items() :
-                    cc_link = f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a><p> : {value}</p>"
+                    cc_link += f"<br>\n\t\t\t\t\t<a href = https://amigo.geneontology.org/amigo/term/{key}>{key}</a> : {value}"
 
             # En cas d'absence d'UniprotID
             else :
