@@ -40,7 +40,11 @@ def html_table(file, mail) :
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
 
-            link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}" # Raccourci
+            link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}"  # Raccourci
+            
+            if embl_info['division'] == 'vertebrates':
+                embl_info['division'] = 'www'
+                link = f"https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}"
             
         ## Liens Ensembl pour protéines et transcrits
             # Initialisation : Premiers lien Ensembl
