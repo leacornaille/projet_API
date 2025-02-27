@@ -71,6 +71,40 @@ def RetrieveDiv (species) :
     
     return(division[7:].lower())
 
+def MakeLinks(species_info):
+
+    # Base du lien en fonction de la division
+    div = species_info["division"]
+    if div == "vertebrates":
+        div = "www"
+    link = f'https://{div}.ensembl.org/{species_info['species'].capitalize()}'  # Raccourci
+
+    # Lien ensembl pour le gene ID
+    species_info["gene_link"]=f'<a href = "{link}/Gene/Summary?db=core;g={species_info['gene_id']}" target="_blank">{species_info["gene_id"]}</a>'
+
+    # Lien gene browser ensembl
+    species_info["gene_browser"] = f'<a href = "{link}/Location/View?db=core;g={species_info["gene_id"]}" target="_blank">'
+
+    ## Liens Ensembl pour protéines et transcrits
+    species_info["transcript_links"] =""
+    species_info["prot_links"]=""
+    for i in range(0, len(species_info["transcript_id"])):
+        transcript = species_info["transcript_id"][i]
+        species_info["transcript_links"] += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/Summary?db=core;g={species_info['species']};t={transcript}" target="_blank">{transcript}</a>'
+
+        # Vérifie si l'index 'i' est valide pour 'prot_id'
+        if i < len(species_info["prot_id"]):
+            if species_info["prot_id"][i] == "Not translated":  # En cas de non traduction
+                species_info["prot_links"] += "<br>\n\t\t\t\t\t<a>Not translated</a>"
+            else:
+                if species_info['division'] == 'bacteria':
+                    species_info["prot_links"] += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary_{transcript}?db=core;g={species_info['species']};t={transcript}" target="_blank">{species_info['prot_id'][i]}</a>'
+                else:
+                    species_info["prot_links"] += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary?db=core;g={species_info['species']};t={transcript}" target="_blank">{species_info['prot_id'][i]}</a>'
+        else:
+            # Si 'prot_id' n'a pas d'élément pour cet 'i', afficher un message indiquant que ce n'est pas traduit
+            species_info["prot_links"] += "<br>\n\t\t\t\t\t<a>Not translated</a>"
+    return(species_info)
 
 def InfoGene (species_info) :
     """
@@ -101,11 +135,9 @@ def InfoGene (species_info) :
             else : # En cas de non traduction ajout d'une mention au transcrit
                 species_info["transcript_id"].append(i["id"] + "(Not translated)")
 
-    div = species_info["division"]
-    if div == "vertebrates":
-        div = "www"
+    # Création des liens
+    species_info = MakeLinks(species_info)
 
-    species_info["gene_browser"] = f"https://{div}.ensembl.org/{current_species.capitalize()}/Location/View?db=core;g={species_info["gene_id"]}"
     return(species_info)
 
 # En cas de lancement par ligne de commande : lit le fichier en argument
