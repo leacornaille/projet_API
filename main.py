@@ -64,13 +64,13 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                 go_info = GO_term.main_GO(species_info_ncbi_uniprot)
             except Exception as e:
                 print(f"Erreur GO term pour {symbol}: {e}")
-                go_info = {"UniprotID": None, "GO": {"molecular_function": {}, "biological_process": {}, "cellular_component": {}}}
+                go_info = {"UniprotID": None, "GO": {"molecular_function": {"Failed request"}, "biological_process": {"Failed request"}, "cellular_component": {"Failed request"}}}
 
             try:
                 uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
             except Exception as e:
                 print(f"Erreur Uniprot pour {symbol}: {e}")
-                uniprot_info = {"protein_name": "Failed request", "uniprot_links": [], "pdb_links": []}
+                uniprot_info = {"protein_name": "Failed request", "uniprot_links": ["Failed request"], "pdb_links": ["Failed request"]}
 
             try:
                 ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"], species_info_ncbi_uniprot["species"], mail)
@@ -78,7 +78,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                 print(f"Erreur NCBI pour {symbol}: Réponse incomplète de l'API ({e})")
             except Exception as e:
                 print(f"Erreur NCBI pour {symbol}: {e}")
-                ncbi_info = {"Official name": "Failed request", "Links gene": [], "Links RNA": [], "Links prot": []}
+                ncbi_info = {"Official name": "Failed request", "Links gene": ["Failed request"], "Links RNA": ["Failed request"], "Links prot": ["Failed request"]}
 
             try:
                 ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"], species_info_ucsc["species"])
