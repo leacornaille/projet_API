@@ -64,7 +64,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                 go_info = GO_term.main_GO(species_info_ncbi_uniprot)
             except Exception as e:
                 print(f"Erreur GO term pour {symbol}: {e}")
-                go_info = {"UniprotID": None, "GO": {"molecular_function": {"Failed request"}, "biological_process": {"Failed request"}, "cellular_component": {"Failed request"}}}
+                go_info = {"UniprotID": None, "GO": {"molecular_function": {}, "biological_process": {}, "cellular_component": {}}}
 
             try:
                 uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
