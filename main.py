@@ -46,47 +46,23 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             print(f"Gène '{species_info_ucsc["gene_symbol"]}' de l'espèce '{species_info_ucsc["species"]}' en cours de traitement...")
 
         # Appel des fonctions principales des sous-scripts
-            embl_info = ensembl.InfoGene(species_info)
             go_info = GO_term.main_GO(species_info_ncbi_uniprot)
             uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
             ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
             ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
 
-            if embl_info['division'] == 'vertebrates':
-                link = f'https://www.ensembl.org/{embl_info['species'].capitalize()}'
-            else :
-                link = f'https://{embl_info['division']}.ensembl.org/{embl_info['species'].capitalize()}'  # Raccourci
+        # Ensembl
+            try :
+                embl_info = ensembl.InfoGene(species_info) # Appel fonction ensembl
+            except :
+                print("Le module ensembl a crash")
+                embl_info = {"gene_link" : "Data not found (crash)",
+                             "gene_browser" : "<br>\n\t\t\t\t\tData not found (crash)",
+                             "transcript_links" : "<br>\n\t\t\t\t\tData not found (crash)",
+                             "prot_links" : "<br>\n\t\t\t\t\tData not found (crash)",
+                             'division' : "Data not found (crash)"
+                }
 
-        ## Liens Ensembl pour protéines et transcrits
-            # Initialisation : Premiers lien Ensembl
-            transcript = embl_info["transcript_id"][0]
-            embl_transcript = f'<a href = "{link}/Transcript/Summary?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{transcript}</a>'
-            if embl_info["prot_id"][0] == "Not translated": # En cas de non traduction
-                embl_prot = "<a>Not translated</a>"
-            else :
-                if embl_info['division'] == 'bacteria':
-                    embl_prot = f'<a href = "{link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{embl_info["prot_id"][0]}</a>'
-                else:
-                    embl_prot = f'<a href = "{link}/Transcript/ProteinSummary?db=core;g={embl_info["species"]};t={transcript}" target="_blank">{embl_info["prot_id"][0]}</a>'
-
-
-            # Suite des liens Ensembl
-            for i in range(1, len(embl_info["transcript_id"])):
-                transcript = embl_info["transcript_id"][i]
-                embl_transcript += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/Summary?db=core;g={embl_info['species']};t={transcript}" target="_blank">{transcript}</a>'
-
-                # Vérifie si l'index 'i' est valide pour 'prot_id'
-                if i < len(embl_info["prot_id"]):
-                    if embl_info["prot_id"][i] == "Not translated":  # En cas de non traduction
-                        embl_prot += "<br>\n\t\t\t\t\t<a>Not translated</a>"
-                    else:
-                        if embl_info['division'] == 'bacteria':
-                            embl_prot += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary_{transcript}?db=core;g={embl_info['species']};t={transcript}" target="_blank">{embl_info['prot_id'][i]}</a>'
-                        else:
-                            embl_prot += f'<br>\n\t\t\t\t\t<a href = "{link}/Transcript/ProteinSummary?db=core;g={embl_info['species']};t={transcript}" target="_blank">{embl_info['prot_id'][i]}</a>'
-                else:
-                    # Si 'prot_id' n'a pas d'élément pour cet 'i', afficher un message indiquant que ce n'est pas traduit
-                    embl_prot += "<br>\n\t\t\t\t\t<a>Not translated</a>"
                     
         ## Liens GO term
             # Faire les liens si un UniprotID a été trouvé
@@ -120,11 +96,11 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             body_html += f"""
                     <tr>                    
                         <td><div class=header_1>
-                            {embl_info['species']}
+                            {species_info['species']}
                         </div></td>
                         
                         <td>
-                            {embl_info["gene_symbol"]}
+                            {species_info["gene_symbol"]}
                         </td>
 
                         <td>
@@ -135,22 +111,21 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                             {ncbi_info['Official name']}
                         </td>
 
-                        <td><a href = "{link}/Gene/Summary?db=core;g={embl_info['gene_id']}" target="_blank">
-                            {embl_info["gene_id"]}
-                        </a></td>
+                        <td>
+                            {embl_info["gene_link"]}
+                        </td>
 
                         <td>
                             {"".join(ncbi_info['Links gene'])}                            
                         </td>
 
-                        <td><a href = "{embl_info["gene_browser"]}" target="_blank">
-                            View {embl_info["gene_symbol"]} in Ensembl genome browser
+                        <td>{embl_info["gene_browser"]}
+                            View {species_info["gene_symbol"]} in Ensembl genome browser
                         </a><br>
                             {ucsc_link["lien_ucsc"]}
                         </td>
 
-                        <td><div class='scroll'>
-                            {embl_transcript}
+                        <td><div class='scroll'>{embl_info["transcript_links"]}
                         </div></td>
 
                         <td><div class='scroll'>
@@ -161,8 +136,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
                             {uniprot_info['protein_name']}
                         </td>
 
-                        <td><div class='scroll'>
-                            {embl_prot}
+                        <td><div class='scroll'>{embl_info["prot_links"]}
                         </div></td>
 
                         <td><div class='scroll'>
@@ -187,8 +161,7 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
 
                         <td><div class='scroll'>
                             {cc_link}
-                        </div></td>
-                        
+                        </div></td>                        
                     </tr>"""
 
     ## HTML Head
