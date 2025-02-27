@@ -46,24 +46,46 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
             print(f"Gène '{species_info_ucsc["gene_symbol"]}' de l'espèce '{species_info_ucsc["species"]}' en cours de traitement...")
 
         # Appel des fonctions principales des sous-scripts
-            go_info = GO_term.main_GO(species_info_ncbi_uniprot)
-            uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
-            ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"],species_info_ncbi_uniprot["species"], mail)
-            ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"],species_info_ucsc["species"])
-
-        # Ensembl
-            try :
-                embl_info = ensembl.InfoGene(species_info) # Appel fonction ensembl
-            except :
-                print("Le module ensembl a crash")
-                embl_info = {"gene_link" : "Data not found (crash)",
-                             "gene_browser" : "<br>\n\t\t\t\t\tData not found (crash)",
-                             "transcript_links" : "<br>\n\t\t\t\t\tData not found (crash)",
-                             "prot_links" : "<br>\n\t\t\t\t\tData not found (crash)",
-                             'division' : "Data not found (crash)"
+            try:
+                embl_info = ensembl.InfoGene(species_info)
+            except Exception as e:
+                print(f"Erreur Ensembl pour {symbol}: {e}")
+                embl_info = {
+                    "species": species_info["species"],
+                    "gene_symbol": species_info["gene_symbol"],
+                    "division": "Failed request",
+                    "gene_id": "Failed request",
+                    "transcript_id": ["Failed request"],
+                    "prot_id": ["Failed request"],
+                    "gene_browser": "#"
                 }
 
-                    
+            try:
+                go_info = GO_term.main_GO(species_info_ncbi_uniprot)
+            except Exception as e:
+                print(f"Erreur GO term pour {symbol}: {e}")
+                go_info = {"UniprotID": None, "GO": {"molecular_function": {}, "biological_process": {}, "cellular_component": {}}}
+
+            try:
+                uniprot_info = uniprotKB.extraire_info_uniprot(species_info_ncbi_uniprot)
+            except Exception as e:
+                print(f"Erreur Uniprot pour {symbol}: {e}")
+                uniprot_info = {"protein_name": "Failed request", "uniprot_links": [], "pdb_links": []}
+
+            try:
+                ncbi_info = NCBI.extract_info(species_info_ncbi_uniprot["gene_symbol"], species_info_ncbi_uniprot["species"], mail)
+            except IncompleteRead as e:
+                print(f"Erreur NCBI pour {symbol}: Réponse incomplète de l'API ({e})")
+            except Exception as e:
+                print(f"Erreur NCBI pour {symbol}: {e}")
+                ncbi_info = {"Official name": "Failed request", "Links gene": [], "Links RNA": [], "Links prot": []}
+
+            try:
+                ucsc_link = ucsc.ucsc_link(species_info_ucsc["gene_symbol"], species_info_ucsc["species"])
+            except Exception as e:
+                print(f"Erreur UCSC pour {symbol}: {e}")
+                ucsc_link = {"lien_ucsc": "Failed request"}
+
         ## Liens GO term
             # Faire les liens si un UniprotID a été trouvé
             if go_info["UniprotID"] != None :
@@ -318,9 +340,8 @@ Troisième argument : Nom du fichier de sortie (exemple : Results.html).
     </html>
     """
 
-    html = open(filename_output,"w")
-    html.write(head_html[1:]+body_html+tail_html)
-    html.close()
+    with open(filename_output, "w") as html:
+        html.write(head_html[1:] + body_html + tail_html)
 
 if __name__ == '__main__':
     args = sys.argv[1:]
@@ -332,5 +353,5 @@ if __name__ == '__main__':
     filename_output = args[2]
     html_table(filename_input, mail, filename_output)
     print(f"Fichier HTML {filename_output} créée")
-    temps = time.ctime(time.time() - start)[11:19]
-    print(f"Temps d'exécution : {temps}")
+    temps = time.time() - start
+    print(f"Temps d'exécution : {temps:.2f} secondes")
